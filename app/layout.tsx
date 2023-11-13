@@ -29,10 +29,14 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             {authModal}
-            <header className="mx-auto flex h-[77.53px] max-w-[1280px]  items-center justify-between bg-[#FFFFFF] pl-[87px] shadow-[0px_1px_9px_0px_#2626260D] ">
-              <Navbar />
+            <header className="bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
+              <div className="mx-auto flex h-[77.53px] max-w-[1280px]  items-center justify-between pl-[87px] ">
+                <Navbar />
+              </div>
             </header>
-            <main className="h-[calc(100vh-77.53px)] w-full">{children}</main>
+            <main className="mx-auto h-[calc(100vh-77.53px)]  max-w-[1280px]">
+              {children}
+            </main>
             <ToastProvider />
           </QueryProvider>
         </ThemeProvider>

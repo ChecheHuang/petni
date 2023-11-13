@@ -13,7 +13,7 @@
     "db:seed": "tsx scripts/seed.ts",
     "db:studio": "npx prisma studio",
     "db:push": "npx prisma db push",
-    "db:generate": "prisma generate",
+    "db:generate": "npx prisma generate",
     "postinstall": "npm run db:generate",
     "db:reset": "npx prisma migrate reset && npm run db:push && npm run db:seed"
   },
@@ -23,7 +23,7 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
-    "@tanstack/react-query": "^5.8.2",
+    "@tanstack/react-query": "^4.35.3",
     "@trpc/client": "^10.43.3",
     "@trpc/react-query": "^10.43.3",
     "@trpc/server": "^10.43.3",
