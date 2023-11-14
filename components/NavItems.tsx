@@ -5,6 +5,45 @@ import { usePathname } from 'next/navigation'
 import { useRef } from 'react'
 import { useHover } from 'usehooks-ts'
 
+function NavItems() {
+  const routes = [
+    {
+      href: '/',
+      alias: 'pair',
+      label: '配對',
+    },
+    {
+      href: '/collect',
+      alias: 'collect',
+      label: '收藏',
+    },
+    {
+      href: '/theme',
+      alias: 'theme',
+      label: '主題館',
+    },
+    {
+      href: '/deliver',
+      alias: 'deliver',
+      label: '送養',
+    },
+    {
+      href: '/emergency',
+      alias: 'emergency',
+      label: '急診',
+    },
+  ]
+  return (
+    <div className="grid w-[470px] grid-cols-5 items-center justify-items-center ">
+      {routes.map((route) => (
+        <NavItem key={route.alias} {...route} />
+      ))}
+    </div>
+  )
+}
+
+export default NavItems
+
 function NavItem({
   alias,
   label,
@@ -43,5 +82,3 @@ function NavItem({
     </Link>
   )
 }
-
-export default NavItem

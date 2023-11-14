@@ -98,7 +98,7 @@ export const authOptions: AuthOptions = {
       } as Awaitable<JWT>
     },
     redirect() {
-      return '/'
+      return '/deliver'
     },
   },
 }

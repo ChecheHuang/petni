@@ -1,11 +1,11 @@
-import Aside from './components/Aside'
-import Main from './components/Main'
+import Aside from './_components/Aside'
+import Main from './_components/Main'
 import React from 'react'
 
 function Home() {
   return (
     <>
-      <div className="mx-auto flex max-w-[1280px] ">
+      <div className="flex">
         <Aside />
         <Main />
       </div>

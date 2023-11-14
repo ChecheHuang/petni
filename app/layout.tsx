@@ -1,4 +1,3 @@
-import Navbar from './components/Navbar'
 import './globals.css'
 import QueryProvider from '@/components/providers/queryProvider'
 import { ThemeProvider } from '@/components/providers/themeProvider'
@@ -29,14 +28,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <QueryProvider>
             {authModal}
-            <header className="bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
-              <div className="mx-auto flex h-[77.53px] max-w-[1280px]  items-center justify-between pl-[87px] ">
-                <Navbar />
-              </div>
-            </header>
-            <main className="mx-auto h-[calc(100vh-77.53px)]  max-w-[1280px]">
-              {children}
-            </main>
+            {children}
             <ToastProvider />
           </QueryProvider>
         </ThemeProvider>

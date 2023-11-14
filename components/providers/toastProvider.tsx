@@ -1,8 +1,7 @@
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import { Toaster } from 'sonner'
 
 const ToastProvider: React.FC = () => {
-  return <ToastContainer closeOnClick autoClose={500} theme="light" />
+  return <Toaster position="top-right" />
 }
 
 export default ToastProvider
