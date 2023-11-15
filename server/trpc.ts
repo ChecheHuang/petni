@@ -1,11 +1,8 @@
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { TRPCError, initTRPC } from '@trpc/server'
-import superjson from 'superjson'
 import { ZodError } from 'zod'
 
 const t = initTRPC.create({
-  transformer: superjson,
-
   errorFormatter({ shape, error }) {
     return {
       ...shape,
@@ -20,12 +17,12 @@ const t = initTRPC.create({
 const middleware = t.middleware
 const isAuth = middleware(async (opts) => {
   const session = await getUserAuth()
-  if (!session || !session.user?.email) {
+  if (!session || !session.user.id) {
     throw new TRPCError({ code: 'UNAUTHORIZED' })
   }
   return opts.next({
     ctx: {
-      email: session.user?.email,
+      userId: session.user.id,
     },
   })
 })

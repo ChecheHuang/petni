@@ -1,6 +1,6 @@
-import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
-import prismadb from '@/lib/prismadb'
-import { createUploadthing, type FileRouter } from 'uploadthing/next'
+import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions';
+import { createUploadthing, type FileRouter } from 'uploadthing/next';
+
 
 const f = createUploadthing()
 
@@ -10,7 +10,6 @@ const middleware = async () => {
   if (!session || !session.user.id) throw new Error('Unauthorized')
   return { userId: session.user.id }
 }
-
 const onUploadComplete = async ({
   metadata,
   file,
@@ -22,13 +21,9 @@ const onUploadComplete = async ({
     url: string
   }
 }) => {
-  await prismadb.animal.create({
-    data: {
-      userId: metadata.userId,
-      name: file.name,
-      imageUrl: file.url,
-    },
-  })
+  console.log('Upload complete for userId:', metadata.userId)
+  console.log('file url', file.url)
+  return { uploadedBy: metadata.userId }
 }
 
 export const ourFileRouter = {
