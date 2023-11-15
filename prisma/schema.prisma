@@ -51,10 +51,10 @@ model User {
 
   accounts Account[]
   sessions Session[]
-  Animal   Animal[]
+  Pet   Pet[]
 }
 
-model Animal {
+model Pet {
   id       String  @id @default(cuid())
   name     String?
   imageUrl String
@@ -73,5 +73,5 @@ model Category {
   id   String @id @default(uuid())
   name String @unique
 
-  Animal Animal[]
+  Animal Pet[]
 }

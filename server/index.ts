@@ -1,9 +1,9 @@
-import { animalRouter } from './routers/animalRouter'
+import { petRouter } from './routers/petRouter'
 import { templatePhoneRouter } from './routers/templatePhoneRouter'
 import { router } from './trpc'
 
 export const appRouter = router({
-  animal: animalRouter,
+  pet: petRouter,
 })
 
 export type AppRouter = typeof appRouter

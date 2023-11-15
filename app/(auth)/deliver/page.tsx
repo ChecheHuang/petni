@@ -10,6 +10,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
+import trpcClient from '@/lib/trpc/trpcClient'
 import { useUploadThing } from '@/lib/uploadthing'
 import { Cloud, File, Loader2 } from 'lucide-react'
 import Image from 'next/image'
@@ -38,18 +39,27 @@ function DeliverPage() {
     return interval
   }
 
-  const onDrop = async (acceptedFile: File[]) => {
-    // setIsUploading(true)
+  const { mutateAsync: createNewPet } = trpcClient.pet.createNewPet.useMutation(
+    {
+      onSuccess: (id) => {
+        toast.success('上傳成功')
+        router.push(`/deliver/${id}`)
+      },
+    },
+  )
 
-    // const progressInterval = startSimulatedProgress()
+  const onDrop = async (acceptedFile: File[]) => {
+    setIsUploading(true)
+
+    const progressInterval = startSimulatedProgress()
 
     const res = await startUpload(acceptedFile)
-    console.log(res)
     if (!res) return toast.error('上傳失敗')
     const [fileResponse] = res
     const imageUrl = fileResponse.url
-    // clearInterval(progressInterval)
-    // setUploadProgress(100)
+    await createNewPet({ imageUrl })
+    clearInterval(progressInterval)
+    setUploadProgress(100)
   }
 
   return (
@@ -99,7 +109,7 @@ function DeliverPage() {
                             <div className="mx-auto mt-4 w-full max-w-xs">
                               <Progress
                                 indicatorColor={
-                                  uploadProgress === 100 ? 'bg-green-500' : ''
+                                  uploadProgress === 100 ? 'bg-info' : ''
                                 }
                                 value={uploadProgress}
                                 className="h-1 w-full bg-zinc-200"
@@ -111,7 +121,9 @@ function DeliverPage() {
                                 </div>
                               ) : null}
                             </div>
-                          ) : null}
+                          ) : (
+                            <div>拖曳或點擊上傳</div>
+                          )}
                         </label>
                         <input
                           {...getInputProps()}
