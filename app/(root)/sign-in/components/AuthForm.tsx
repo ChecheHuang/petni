@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { BsGithub } from 'react-icons/bs'
 import { FcGoogle } from 'react-icons/fc'
-import { toast } from 'react-toastify'
+import { toast } from 'sonner'
 
 function AuthForm() {
   const session = useSession()

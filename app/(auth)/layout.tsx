@@ -16,8 +16,7 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
           <AuthNavbar image={session?.user?.image as string} />
         </MaxWidthWrapper>
       </header>
-
-      {children}
+      <MaxWidthWrapper>{children}</MaxWidthWrapper>
     </div>
   )
 }
