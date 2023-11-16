@@ -1,5 +1,5 @@
-import { getUserAuth } from '../api/auth/[...nextauth]/authOptions'
 import AuthNavbar from './_compoment/AuthNavbar'
+import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { redirect } from 'next/navigation'
 import React from 'react'

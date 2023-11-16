@@ -51,27 +51,51 @@ model User {
 
   accounts Account[]
   sessions Session[]
-  Pet   Pet[]
+  Pet      Pet[]
+}
+
+enum GenderEnum {
+  male
+  female
+  unknown
+}
+
+enum CategoryEnum {
+  cat
+  dog
+}
+
+enum FurColorEnum {
+  white    @map(name: "白")
+  black    @map(name: "黑")
+  auburn   @map(name: "紅棕")
+  bicolor  @map(name: "雙色")
+  tricolor @map(name: "三色")
+  yellow   @map(name: "黃")
+  tabby    @map(name: "虎斑")
+  gray     @map(name: "灰")
+}
+
+enum AgeEnum {
+  infant @map(name: "幼齡")
+  adult  @map(name: "成年")
 }
 
 model Pet {
-  id       String  @id @default(cuid())
-  name     String?
-  imageUrl String
+  id          String        @id @default(cuid())
+  category    CategoryEnum?
+  gender      GenderEnum?
+  age         AgeEnum?
+  name        String?
+  imageUrl    String
+  contactInfo String?
+  address     String?
+  situation   String?
+  isPublish   Boolean       @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  categoryId String?
-  category   Category? @relation(fields: [categoryId], references: [id])
-
   userId String
   user   User   @relation(fields: [userId], references: [id])
-}
-
-model Category {
-  id   String @id @default(uuid())
-  name String @unique
-
-  Animal Pet[]
 }
