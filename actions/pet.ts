@@ -7,6 +7,7 @@ export const getPets = async () => {
       id: true,
       name: true,
       imageUrl: true,
+      address: true,
     },
   })
   return pets

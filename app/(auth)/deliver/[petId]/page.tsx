@@ -5,7 +5,7 @@ async function PetIdPage({ params: { petId } }: { params: { petId: string } }) {
   const pet = await getPet(petId)
   console.log(pet)
 
-  return <div>Page</div>
+  return <div>{petId}</div>
 }
 
 export default PetIdPage

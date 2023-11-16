@@ -8,7 +8,7 @@ import { useHover } from 'usehooks-ts'
 function NavItems() {
   const routes = [
     {
-      href: '/',
+      href: '/pair',
       alias: 'pair',
       label: '配對',
     },
@@ -56,7 +56,9 @@ function NavItem({
   const pathname = usePathname()
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
-  const active = pathname === href
+  // const active = pathname === href
+  const active = pathname.startsWith(href)
+
   const imgUrl =
     isHover || active
       ? `/images/header/${alias}-pink.png`

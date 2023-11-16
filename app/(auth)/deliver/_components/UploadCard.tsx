@@ -42,6 +42,7 @@ function UploadCard() {
     {
       onSuccess: (id) => {
         toast.success('上傳成功')
+        router.refresh()
         router.push(`/deliver/${id}`)
       },
     },
@@ -63,7 +64,7 @@ function UploadCard() {
   return (
     <Dialog>
       <DialogTrigger>
-        <DeliverCard className="flex cursor-pointer flex-col items-center justify-center gap-2.5 ">
+        <DeliverCard className="flex  flex-col items-center justify-center gap-2.5 ">
           <Image
             src={'/images/deliver/Vector.png'}
             alt="deliver"
