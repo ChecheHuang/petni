@@ -22,6 +22,7 @@ export const getPet = async (petId: string) => {
   const pet = await prismadb.pet.findUnique({
     select: {
       id: true,
+      address: true,
       name: true,
       imageUrl: true,
       category: true,

@@ -10,7 +10,7 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
     redirect('/')
   }
   return (
-    <div>
+    <div className="min-h-screen">
       <header className="bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
         <MaxWidthWrapper className="h-[77.53px]">
           <AuthNavbar image={session?.user?.image as string} />
