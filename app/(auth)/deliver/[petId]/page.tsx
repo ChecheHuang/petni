@@ -1,31 +1,34 @@
-import { getPet } from '@/actions/pet'
+import AgeCard from './_components/AgeCard'
+import CategoryGenderCard from './_components/CategoryGenderCard'
+import ContactCard from './_components/ContactCard'
+import DescriptionCard from './_components/DescriptionCard'
+import ImageCard from './_components/ImageCard'
+import NameCard from './_components/NameCard'
+import SettingForm from './_components/SettingForm'
+import { getPet } from '@/app/(auth)/deliver/_actions/pet'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import Image from 'next/image'
 import React from 'react'
 
 async function PetIdPage({ params: { petId } }: { params: { petId: string } }) {
   const pet = await getPet(petId)
+  const { imageUrl, ...rest } = pet
 
-  console.log(pet)
   return (
-    <div className="flex h-[calc(100vh-77.53px)] items-center justify-center ">
-      <Card className="flex h-[356.47px] w-[237.7px] flex-col gap-2.5 rounded-[28px] p-4 ">
-        <div className="relative h-[264.47px] w-[205.19px] overflow-hidden rounded-[28px]">
-          <Image src={pet.imageUrl} layout="fill" alt="" />
+    <div className="mt-[13px] flex h-[calc(100vh-77.53px)] justify-center gap-[13px] ">
+      <ImageCard petId={petId} imageUrl={imageUrl} />
+      <div className="flex gap-[13px] ">
+        {/* <div className="space-y-3">
+          <CategoryGenderCard category={category} gender={gender} />
+          <AgeCard age={age} />
+          <NameCard name={name} />
         </div>
-        <Button variant="info">替換照片</Button>
-      </Card>
-      <Card className=" h-[126px] w-[381px] rounded-[20px] p-[18px]"></Card>
+        <div className="space-y-3">
+          <ContactCard phone={phone} city={city} area={area} />
+          <DescriptionCard description={description} />
+          <Button className="w-full">發布</Button>
+        </div> */}
+      </div>
+      <SettingForm {...rest} />
     </div>
   )
 }

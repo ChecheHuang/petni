@@ -1,6 +1,8 @@
 'use client'
 
+import { useUpload } from '../_hooks/useUpload'
 import DeliverCard from './DeliverCard'
+import { FillImage } from '@/components/fill-image'
 import {
   Dialog,
   DialogContent,
@@ -11,7 +13,6 @@ import {
 } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
 import trpcClient from '@/lib/trpc/trpcClient'
-import { useUploadThing } from '@/lib/uploadthing'
 import { Cloud, File, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -20,49 +21,29 @@ import Dropzone from 'react-dropzone'
 import { toast } from 'sonner'
 
 function UploadCard() {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
-  const [isUploading, setIsUploading] = useState<boolean>(false)
-  const [uploadProgress, setUploadProgress] = useState<number>(0)
-  const { startUpload } = useUploadThing('image')
-  const startSimulatedProgress = () => {
-    setUploadProgress(0)
-    const interval = setInterval(() => {
-      setUploadProgress((prevProgress) => {
-        if (prevProgress >= 95) {
-          clearInterval(interval)
-          return prevProgress
-        }
-        return prevProgress + 5
-      })
-    }, 500)
-    return interval
-  }
+  const { onUploading, isUploading, uploadProgress } = useUpload()
 
-  const { mutateAsync: createNewPet } = trpcClient.pet.createNewPet.useMutation(
-    {
-      onSuccess: (id) => {
-        toast.success('上傳成功')
-        router.refresh()
-        router.push(`/deliver/${id}`)
-      },
+  const { mutateAsync: createNewPet } = trpcClient.pet.createPet.useMutation({
+    onSuccess: (id) => {
+      toast.success('上傳成功')
+      setIsOpen(false)
+      router.refresh()
+      router.push(`/deliver/${id}`)
     },
-  )
+  })
 
   const onDrop = async (acceptedFile: File[]) => {
-    setIsUploading(true)
-
-    const progressInterval = startSimulatedProgress()
-
-    const res = await startUpload(acceptedFile)
-    if (!res) return toast.error('上傳失敗')
-    const [fileResponse] = res
-    const imageUrl = fileResponse.url
-    await createNewPet({ imageUrl })
-    clearInterval(progressInterval)
-    setUploadProgress(100)
+    try {
+      const imageUrl = await onUploading(acceptedFile)
+      await createNewPet({ imageUrl })
+    } catch (error: unknown) {
+      toast.error(JSON.stringify(error))
+    }
   }
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>
         <DeliverCard className="flex  flex-col items-center justify-center gap-2.5 ">
           <Image
@@ -86,10 +67,7 @@ function UploadCard() {
                     className="m-4 h-64 rounded-lg border border-dashed border-gray-300"
                   >
                     <div className="flex h-full w-full items-center justify-center">
-                      <label
-                        // htmlFor="dropzone-file"
-                        className="flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 hover:bg-gray-100"
-                      >
+                      <label className="flex h-full w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-50 hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pb-6 pt-5">
                           <Cloud className="mb-2 h-6 w-6 text-zinc-500" />
                         </div>
@@ -107,7 +85,9 @@ function UploadCard() {
                           <div className="mx-auto mt-4 w-full max-w-xs">
                             <Progress
                               indicatorColor={
-                                uploadProgress === 100 ? 'bg-info' : ''
+                                uploadProgress === 100
+                                  ? 'bg-green-500'
+                                  : 'bg-info'
                               }
                               value={uploadProgress}
                               className="h-1 w-full bg-zinc-200"
@@ -126,7 +106,6 @@ function UploadCard() {
                       <input
                         {...getInputProps()}
                         type="file"
-                        id="dropzone-file"
                         className="hidden"
                       />
                     </div>

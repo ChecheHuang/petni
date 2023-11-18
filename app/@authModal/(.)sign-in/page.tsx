@@ -1,5 +1,5 @@
 // 'use client'
-import AuthModal from './components/AuthModal'
+import AuthModal from './_components/AuthModal'
 import React from 'react'
 
 function Page() {

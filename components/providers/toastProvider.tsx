@@ -1,7 +1,7 @@
 import { Toaster } from 'sonner'
 
 const ToastProvider: React.FC = () => {
-  return <Toaster position="top-right" />
+  return <Toaster theme="dark" richColors closeButton position="top-right" />
 }
 
 export default ToastProvider

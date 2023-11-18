@@ -1,17 +1,20 @@
 import { PrismaClient } from '@prisma/client'
 
-const database = new PrismaClient()
+const prismadb = new PrismaClient()
+
+const reset = async () => {
+  await prismadb.pet.deleteMany()
+}
 
 async function main() {
   try {
-    const test = await database.user.findMany()
-    console.log(test)
+    await reset()
 
     console.log('Success')
   } catch (error) {
     console.log('Error seeding the database categories', error)
   } finally {
-    await database.$disconnect()
+    await prismadb.$disconnect()
   }
 }
 

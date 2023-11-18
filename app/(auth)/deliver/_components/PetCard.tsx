@@ -1,33 +1,26 @@
 'use client'
 
+import { GetPetsReturnType } from '../_actions/pet'
 import DeliverCard from './DeliverCard'
-import { Pet } from '@prisma/client'
+import { FillImage } from '@/components/fill-image'
 import { X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-function PetCard({
-  id,
-  imageUrl,
-  name,
-  address,
-}: Pick<Pet, 'id' | 'imageUrl' | 'name' | 'address'>) {
+function PetCard({ id, imageUrl, name, city, area }: GetPetsReturnType) {
+  const handleDelete = async () => {
+    console.log('todo delete ' + id)
+  }
   return (
     <DeliverCard className="flex flex-col items-center p-3 ">
       <div className=" relative flex h-[132px] w-[138px] items-center justify-center overflow-hidden rounded-[28px] bg-[#c4a888] ">
-        <X className="absolute right-2 top-2 h-6 w-6 rounded-full bg-white  p-[4px] " />
+        <X
+          onClick={handleDelete}
+          className="absolute right-2 top-2 h-6 w-6 rounded-full bg-white  p-[4px] "
+        />
         <Link href={`/deliver/${id}`}>
-          <Image
-            className="rounded-[20px]"
-            width="0"
-            height="0"
-            sizes="100vw"
-            style={{ width: '100%', height: 'auto' }}
-            src={imageUrl}
-            alt=""
-            priority
-          />
+          <FillImage className="rounded-[20px]" src={imageUrl} priority />
         </Link>
       </div>
       <div className="mt-[7px] flex h-6 w-full items-center justify-between">
@@ -35,7 +28,7 @@ function PetCard({
         <Image src="/images/female.png" width={24} height={24} alt="" />
       </div>
       <div className="h-[21px] w-full truncate text-xs leading-[21px] text-gray-400">
-        {address === null ? '尚未設置地址' : address}
+        {city === null ? '尚未設置地址' : city + area}
       </div>
     </DeliverCard>
   )

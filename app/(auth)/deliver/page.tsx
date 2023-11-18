@@ -1,6 +1,6 @@
+import { getPets, GetPetsReturnType } from './_actions/pet'
 import PetCard from './_components/PetCard'
 import UploadCard from './_components/UploadCard'
-import { getPets } from '@/actions/pet'
 
 async function DeliverPage() {
   const pets = await getPets()

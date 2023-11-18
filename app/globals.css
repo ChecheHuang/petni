@@ -22,10 +22,10 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --ring: 12.4 87.1% 75.1%;
+    /* --ring: 240 5.9% 10%; */
     --radius: 0.5rem;
     --info: 12.4 87.1% 75.1%;
-
   }
 }
 
@@ -42,9 +42,6 @@ input:disabled + label {
   opacity: 50%;
 }
 
-/* 
-.bg-card{
- background: linear-gradient(white, black);
-} */
-
-
+.bg-linear {
+  background: linear-gradient(white, black);
+}

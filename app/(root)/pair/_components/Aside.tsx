@@ -1,6 +1,6 @@
 'use client'
 
-import ImageButton from './ImageButton'
+import ImageButton from '../../../../components/buttons/ImageButton'
 import SimpleBar from '@/components/SimpleBar'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
@@ -21,8 +21,8 @@ function Aside() {
                 imgWidth={36}
                 imgHeight={36}
                 alt="cat"
-                imgUrl={`/images/aside/cat-dark.png`}
-                hoverImgUrl={`/images/aside/cat.png`}
+                imgUrl={`/images/cat-dark.png`}
+                hoverImgUrl={`/images/cat.png`}
               />
               <ImageButton
                 variant="primary"
@@ -30,8 +30,8 @@ function Aside() {
                 imgWidth={36}
                 imgHeight={36}
                 alt="cat"
-                imgUrl={`/images/aside/dog-dark.png`}
-                hoverImgUrl={`/images/aside/dog.png`}
+                imgUrl={`/images/dog-dark.png`}
+                hoverImgUrl={`/images/dog.png`}
               />
               <Button variant="primary" size="big">
                 不拘
@@ -43,7 +43,7 @@ function Aside() {
             <div className="flex flex-wrap  justify-between">
               <Button variant="primary" size="big">
                 <Image
-                  src="/images/aside/male.png"
+                  src="/images/male.png"
                   alt="male"
                   width={36}
                   height={36}
@@ -52,7 +52,7 @@ function Aside() {
 
               <Button variant="primary" size="big">
                 <Image
-                  src="/images/aside/female.png"
+                  src="/images/female.png"
                   alt="male"
                   width={36}
                   height={36}

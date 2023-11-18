@@ -10,7 +10,8 @@ interface ImageButtonProps extends ButtonProps {
   imgHeight: number
   alt?: string
   imgUrl: string
-  hoverImgUrl: string
+  hoverImgUrl?: string
+  isActive?: boolean
 }
 
 function ImageButton({
@@ -18,15 +19,22 @@ function ImageButton({
   imgHeight,
   alt = '/',
   imgUrl,
-  hoverImgUrl,
+  hoverImgUrl = imgUrl,
+  isActive = false,
   ...props
 }: ImageButtonProps) {
   const hoverRef = useRef(null)
   const isHover = useHover(hoverRef)
   return (
-    <Button ref={hoverRef} {...props}>
+    <Button
+      type="button"
+      variant={isActive ? 'default' : 'primary'}
+      ref={hoverRef}
+      {...props}
+    >
       <Image
-        src={isHover ? hoverImgUrl : imgUrl}
+        src={isHover || isActive ? hoverImgUrl : imgUrl}
+        sizes="100vw"
         width={imgWidth}
         height={imgHeight}
         alt={alt}

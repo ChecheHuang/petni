@@ -1,5 +1,6 @@
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import prismadb from '@/lib/prismadb'
+import { notFound } from 'next/navigation'
 
 export const getPets = async () => {
   const pets = await prismadb.pet.findMany({
@@ -7,11 +8,13 @@ export const getPets = async () => {
       id: true,
       name: true,
       imageUrl: true,
-      address: true,
+      city: true,
+      area: true,
     },
   })
   return pets
 }
+export type GetPetsReturnType = GetArrType<AsyncFnReturnType<typeof getPets>>
 
 export const getPet = async (petId: string) => {
   const session = await getUserAuth()
@@ -21,18 +24,24 @@ export const getPet = async (petId: string) => {
 
   const pet = await prismadb.pet.findUnique({
     select: {
-      id: true,
-      address: true,
-      name: true,
       imageUrl: true,
       category: true,
+      gender: true,
+      age: true,
+      name: true,
+      furColor: true,
+      phone: true,
+      city: true,
+      area: true,
+      description: true,
     },
     where: {
       id: petId,
       userId,
     },
   })
-  if (!pet) throw new Error('Pet not found')
+  if (!pet) return notFound()
 
   return pet
 }
+export type GetPetReturnType = AsyncFnReturnType<typeof getPet>
