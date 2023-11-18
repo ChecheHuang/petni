@@ -1,24 +1,34 @@
 'use client'
 
+import { FormDataType } from './SettingForm'
 import { Card } from '@/components/ui/card'
-import { FormControl } from '@/components/ui/form'
+import { FormControl, FormField } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import React from 'react'
+import { Control } from 'react-hook-form'
 
 type NameCardProps = {
-  value: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  control: Control<FormDataType, any>
 }
 
-export default function NameCard(field: NameCardProps) {
+export default function NameCard({ control }: NameCardProps) {
   return (
-    <FormControl>
-      <Card className=" h-[106px] w-[381px] rounded-[20px] p-[18px]">
-        <div className="space-y-1.5">
-          <div>牠的名字</div>
-          <Input placeholder="若尚未取名可不填" {...field} />
-        </div>
-      </Card>
-    </FormControl>
+    <Card className=" h-[106px] w-[381px] rounded-[20px] p-[18px]">
+      <div className="space-y-1.5">
+        <div>牠的名字</div>
+        <FormField
+          control={control}
+          name="name"
+          render={({ field: { value, ...rest } }) => {
+            const field = { value: value ? value : '', ...rest }
+            return (
+              <FormControl>
+                <Input placeholder="若尚未取名可不填" {...field} />
+              </FormControl>
+            )
+          }}
+        />
+      </div>
+    </Card>
   )
 }

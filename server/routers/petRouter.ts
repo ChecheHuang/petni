@@ -1,5 +1,6 @@
 import { router, publicProcedure, privateProcedure } from '../trpc'
 import prismadb from '@/lib/prismadb'
+import { petFormSchema } from '@/lib/validations/petValidation'
 import { Prisma } from '@prisma/client'
 import { TRPCError } from '@trpc/server'
 import { revalidatePath } from 'next/cache'
@@ -15,10 +16,9 @@ export const petRouter = router({
           imageUrl,
         },
       })
-      revalidatePath('/deliver')
       return id
     }),
-  updatePet: privateProcedure
+  updatePetImage: privateProcedure
     .input(
       z.object({
         petId: z.string(),
@@ -27,12 +27,28 @@ export const petRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const { petId, imageUrl } = input
-      const update = await prismadb.pet.update({
+      await prismadb.pet.update({
         where: {
           id: petId,
         },
         data: {
           imageUrl,
+        },
+      })
+      return
+    }),
+  updatePet: privateProcedure
+    .input(petFormSchema)
+    .mutation(async ({ input }) => {
+      const { petId, ...rest } = input
+      console.log(input)
+      await prismadb.pet.update({
+        where: {
+          id: petId,
+        },
+        data: {
+          ...rest,
+          isPublish: true,
         },
       })
       return

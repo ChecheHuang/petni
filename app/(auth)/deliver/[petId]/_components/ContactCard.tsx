@@ -1,6 +1,8 @@
 'use client'
 
+import { FormDataType } from './SettingForm'
 import { Card } from '@/components/ui/card'
+import { FormControl, FormField } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import {
   Select,
@@ -12,50 +14,104 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cityOptions } from '@/config/options'
-import { Pet } from '@prisma/client'
-import React from 'react'
+import { useUpdateEffect } from '@/hooks/useUpdateEffect'
+import { Control } from 'react-hook-form'
 
-type ContactCardProps = {}
+type ContactCardProps = {
+  control: Control<FormDataType, any>
+  city: string | null
+  resetArea: () => void
+}
 
-export default function ContactCard(field: ContactCardProps) {
+export default function ContactCard({
+  control,
+  city,
+  resetArea,
+}: ContactCardProps) {
+  useUpdateEffect(() => {
+    resetArea()
+  }, [city])
   return (
     <Card className=" h-[164px] w-[381px] rounded-[20px] p-[18px]">
       <div className="space-y-3">
         <div>
           聯絡方式<span className="text-info">(*必選)</span>
         </div>
-        <Input placeholder="聯絡方式(電話、通訊等等．．．)" />
+        <FormField
+          control={control}
+          name="phone"
+          render={({ field: { value, ...rest } }) => {
+            const field = { value: value ? value : '', ...rest }
+            return (
+              <FormControl>
+                <Input
+                  placeholder="聯絡方式(電話、通訊等等．．．)"
+                  {...field}
+                />
+              </FormControl>
+            )
+          }}
+        />
+
         <div className="flex gap-2 ">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="選擇縣市" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>選擇縣市</SelectLabel>
-                {Object.keys(cityOptions).map((city) => (
-                  <SelectItem key={city} value={city}>
-                    {city}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder="選擇縣市" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>選擇縣市</SelectLabel>
-                {Object.keys(cityOptions).map((city) => (
-                  <SelectItem key={city} value={city}>
-                    {city}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <FormField
+            control={control}
+            name="city"
+            render={({ field: { value, onChange } }) => {
+              return (
+                <FormControl>
+                  <Select onValueChange={onChange} value={value ? value : ''}>
+                    <SelectTrigger className={value ? '' : 'text-[#DEDEDE]'}>
+                      <SelectValue placeholder="選擇縣市" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>選擇縣市</SelectLabel>
+                        {Object.keys(cityOptions).map((city) => (
+                          <SelectItem key={city} value={city}>
+                            {city}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+              )
+            }}
+          />
+          <FormField
+            control={control}
+            name="area"
+            render={({ field: { value, onChange } }) => {
+              return (
+                <FormControl>
+                  <Select
+                    disabled={city === null}
+                    onValueChange={onChange}
+                    value={value ? value : ''}
+                  >
+                    <SelectTrigger className={value ? '' : 'text-[#DEDEDE]'}>
+                      <SelectValue placeholder="選擇區別" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>選擇區別</SelectLabel>
+                        {city !== null
+                          ? cityOptions[city as keyof typeof cityOptions].map(
+                              (city) => (
+                                <SelectItem key={city} value={city}>
+                                  {city}
+                                </SelectItem>
+                              ),
+                            )
+                          : null}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+              )
+            }}
+          />
         </div>
       </div>
     </Card>

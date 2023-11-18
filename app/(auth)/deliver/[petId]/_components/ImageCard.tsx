@@ -38,7 +38,7 @@ export default function ImageCard({
     return
   }
   const { mutateAsync: updatePet, isLoading: isUpdatePet } =
-    trpcClient.pet.updatePet.useMutation({
+    trpcClient.pet.updatePetImage.useMutation({
       onSuccess: () => {
         toast.success('更新成功')
         router.refresh()

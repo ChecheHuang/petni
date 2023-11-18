@@ -1,0 +1,41 @@
+'use client'
+
+import CustomButton from '@/components/buttons/CustomButton'
+import { Card } from '@/components/ui/card'
+import { catFurColorOptions, dogFurColorOptions } from '@/config/options'
+import { Pet } from '@prisma/client'
+import React from 'react'
+
+type FurColorCardProps = {
+  setFurColor: (furColor: string) => void
+} & Pick<Pet, 'furColor' | 'category'>
+
+export default function FurColorCard({
+  setFurColor,
+  furColor,
+  category,
+}: FurColorCardProps) {
+  const options = category === '貓' ? catFurColorOptions : dogFurColorOptions
+
+  if (!category) return null
+  return (
+    <Card className=" h-[206px] w-[381px]  rounded-[20px] p-[18px]">
+      <div className="space-y-1.5">
+        <div>
+          毛色<span className="text-info">(*必選)</span>
+        </div>
+        <div className=" grid grid-cols-3 gap-2.5">
+          {options.map((option) => (
+            <CustomButton
+              key={option}
+              className="h-[40px] w-[110px] "
+              value={option}
+              activeValue={furColor}
+              onClick={setFurColor}
+            />
+          ))}
+        </div>
+      </div>
+    </Card>
+  )
+}
