@@ -41,7 +41,6 @@ export const petRouter = router({
     .input(petFormSchema)
     .mutation(async ({ input }) => {
       const { petId, ...rest } = input
-      console.log(input)
       await prismadb.pet.update({
         where: {
           id: petId,
@@ -53,4 +52,13 @@ export const petRouter = router({
       })
       return
     }),
+  deletePet: privateProcedure.input(z.string()).mutation(async ({ input }) => {
+    try {
+      await prismadb.pet.delete({
+        where: {
+          id: input,
+        },
+      })
+    } catch (err) {}
+  }),
 })

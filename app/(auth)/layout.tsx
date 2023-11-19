@@ -1,4 +1,5 @@
 import AuthNavbar from './_compoment/AuthNavbar'
+import DeleteModal from './_compoment/DeleteModal'
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import { redirect } from 'next/navigation'
@@ -10,14 +11,17 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
     redirect('/')
   }
   return (
-    <div className="min-h-screen ">
-      <header className="bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
-        <MaxWidthWrapper className="h-[77.53px]">
-          <AuthNavbar image={session?.user?.image as string} />
-        </MaxWidthWrapper>
-      </header>
-      <MaxWidthWrapper>{children}</MaxWidthWrapper>
-    </div>
+    <>
+      <DeleteModal />
+      <div className="min-h-screen ">
+        <header className="bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
+          <MaxWidthWrapper className="h-[77.53px]">
+            <AuthNavbar image={session?.user?.image as string} />
+          </MaxWidthWrapper>
+        </header>
+        <MaxWidthWrapper>{children}</MaxWidthWrapper>
+      </div>
+    </>
   )
 }
 

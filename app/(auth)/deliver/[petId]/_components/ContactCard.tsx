@@ -14,7 +14,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cityOptions } from '@/config/options'
-import { useUpdateEffect } from '@/hooks/useUpdateEffect'
 import { Control } from 'react-hook-form'
 
 type ContactCardProps = {
@@ -28,9 +27,6 @@ export default function ContactCard({
   city,
   resetArea,
 }: ContactCardProps) {
-  useUpdateEffect(() => {
-    resetArea()
-  }, [city])
   return (
     <Card className=" h-[164px] w-[381px] rounded-[20px] p-[18px]">
       <div className="space-y-3">
@@ -60,7 +56,13 @@ export default function ContactCard({
             render={({ field: { value, onChange } }) => {
               return (
                 <FormControl>
-                  <Select onValueChange={onChange} value={value ? value : ''}>
+                  <Select
+                    onValueChange={(value) => {
+                      resetArea()
+                      onChange(value)
+                    }}
+                    value={value ? value : ''}
+                  >
                     <SelectTrigger className={value ? '' : 'text-[#DEDEDE]'}>
                       <SelectValue placeholder="選擇縣市" />
                     </SelectTrigger>

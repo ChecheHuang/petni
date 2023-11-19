@@ -1,40 +1,29 @@
 'use client'
 
+import Loading from '../loading'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog'
-import { cn } from '@/lib/utils'
 import { useEffect, useState } from 'react'
 
 interface ModalProps {
   isOpen: boolean
-  children: React.ReactNode
+  description: string
+  footer: React.ReactNode
   onClose?: () => void
-  title?: string
-  description?: string
-  className?: string
-  footer?: React.ReactNode
+  isLoading?: boolean
 }
 
 export const Modal: React.FC<ModalProps> = ({
-  title,
   description,
   isOpen,
-  onClose,
-  children,
-  className,
   footer,
+  onClose,
+  isLoading,
 }) => {
-  const onChange = (open: boolean) => {
-    if (!open && onClose) {
-      onClose()
-    }
-  }
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -44,16 +33,20 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isMounted) {
     return null
   }
+  const onChange = (open: boolean) => {
+    if (!open && onClose) {
+      onClose()
+    }
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogContent className={cn(' max-h-[90vh] overflow-auto ', className)}>
-        <DialogHeader>
-          {title && <DialogTitle>{title}</DialogTitle>}
-          {description && <DialogDescription>{description}</DialogDescription>}
-        </DialogHeader>
-        <div>{children}</div>
-        {footer && <DialogFooter>{footer}</DialogFooter>}
+      <DialogContent className=" flex h-[156px] w-[472px] flex-col items-center  ">
+        {isLoading && <Loading className="absolute w-full" />}
+        <DialogDescription className="mt-[39px]">
+          {description}
+        </DialogDescription>
+        <DialogFooter className="mt-[18px]">{footer}</DialogFooter>
       </DialogContent>
     </Dialog>
   )

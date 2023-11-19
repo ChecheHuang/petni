@@ -9,7 +9,6 @@ import FurColorCard from './FurColorCard'
 import NameCard from './NameCard'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
-import { useUpdateEffect } from '@/hooks/useUpdateEffect'
 import trpcClient from '@/lib/trpc/trpcClient'
 import { petFormSchema } from '@/lib/validations/petValidation'
 import { useRouter } from 'next/navigation'
@@ -29,6 +28,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
   const form = useForm<FormDataType>({
     defaultValues: initData,
   })
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null)
   const control = form.control
   const { gender, category, age, furColor, city } = form.watch()
   const router = useRouter()
@@ -38,6 +38,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
       onSuccess: () => {
         toast.success('更新成功')
         router.refresh()
+        setErrorMessage(null)
         // router.push(`/deliver`)
       },
     })
@@ -49,6 +50,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
     } catch (error) {
       if (error instanceof z.ZodError) {
         toast.error('請先確認必選欄位填寫正確')
+        setErrorMessage('*必填項目尚未填寫完，請填寫完整後再發佈。')
       }
     }
   }
@@ -87,6 +89,11 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
             <Button disabled={isUpdating} className="w-full" type="submit">
               發布
             </Button>
+            {errorMessage && (
+              <div className="mt-[24px] w-[381px] break-words text-[20px] text-info ">
+                *必填項目尚未填寫完，請填寫完整後再發佈。
+              </div>
+            )}
           </div>
         </form>
       </Form>
