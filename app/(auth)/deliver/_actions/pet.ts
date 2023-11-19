@@ -10,6 +10,8 @@ export const getPets = async () => {
       imageUrl: true,
       city: true,
       area: true,
+      gender: true,
+      isPublish: true,
     },
   })
   return pets
@@ -34,6 +36,7 @@ export const getPet = async (petId: string) => {
       city: true,
       area: true,
       description: true,
+      isPublish: true,
     },
     where: {
       id: petId,

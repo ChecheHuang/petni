@@ -55,7 +55,7 @@ function UploadCard() {
           <div className="text-sm text-info">上傳寵物照片</div>
         </DeliverCard>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="p-6">
         <DialogHeader>
           <DialogTitle>上傳寵物照片</DialogTitle>
           <DialogDescription>

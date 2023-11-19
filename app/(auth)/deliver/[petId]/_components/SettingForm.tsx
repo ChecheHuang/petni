@@ -7,6 +7,7 @@ import ContactCard from './ContactCard'
 import DescriptionCard from './DescriptionCard'
 import FurColorCard from './FurColorCard'
 import NameCard from './NameCard'
+import { useNavigateModal } from '@/app/(auth)/_hooks/useNavigateModal'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import trpcClient from '@/lib/trpc/trpcClient'
@@ -32,6 +33,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
   const control = form.control
   const { gender, category, age, furColor, city } = form.watch()
   const router = useRouter()
+  const { onOpen } = useNavigateModal()
 
   const { mutate: update, isLoading: isUpdating } =
     trpcClient.pet.updatePet.useMutation({
@@ -39,6 +41,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
         toast.success('更新成功')
         router.refresh()
         setErrorMessage(null)
+        onOpen(petId)
         // router.push(`/deliver`)
       },
     })
@@ -86,8 +89,13 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
               city={city}
             />
             <DescriptionCard control={control} />
-            <Button disabled={isUpdating} className="w-full" type="submit">
-              發布
+            <Button
+              isLoading={isUpdating}
+              disabled={isUpdating}
+              className="w-full"
+              type="submit"
+            >
+              {initData.isPublish ? '更新' : '發布'}
             </Button>
             {errorMessage && (
               <div className="mt-[24px] w-[381px] break-words text-[20px] text-info ">

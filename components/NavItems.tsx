@@ -61,8 +61,8 @@ function NavItem({
 
   const imgUrl =
     isHover || active
-      ? `/images/header/${alias}-pink.png`
-      : `/images/header/${alias}.png`
+      ? `/images/icons/${alias}-pink.png`
+      : `/images/icons/${alias}.png`
   return (
     <Link ref={hoverRef} className="group flex gap-2 " href={href}>
       <Image

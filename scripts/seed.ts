@@ -17,7 +17,7 @@ const initSeed = async () => {
           {
             imageUrl: '/images/seed/cat.png',
             category: '貓',
-            gender: '女',
+            gender: '女生',
             age: '幼齡',
             furColor: '橘',
             phone: '0912345678',
@@ -26,11 +26,12 @@ const initSeed = async () => {
             name: '我是貓貓',
             description:
               '我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓',
+            isPublish: true,
           },
           {
             imageUrl: '/images/seed/dog.png',
-            category: '狗',
-            gender: '男',
+            category: '犬',
+            gender: '男生',
             age: '成年',
             furColor: '雙色',
             phone: '0912345678',
@@ -38,7 +39,11 @@ const initSeed = async () => {
             area: '中正區',
             name: '我是狗狗',
             description:
-              '我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗',
+              '我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗',
+            isPublish: true,
+          },
+          {
+            imageUrl: '/images/seed/dog2.png',
           },
         ],
       },

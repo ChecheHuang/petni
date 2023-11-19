@@ -21,8 +21,8 @@ function Aside() {
                 imgWidth={36}
                 imgHeight={36}
                 alt="cat"
-                imgUrl={`/images/cat-dark.png`}
-                hoverImgUrl={`/images/cat.png`}
+                imgUrl={`/images/icons/cat-dark.png`}
+                hoverImgUrl={`/images/icons/cat.png`}
               />
               <ImageButton
                 variant="primary"
@@ -30,8 +30,8 @@ function Aside() {
                 imgWidth={36}
                 imgHeight={36}
                 alt="cat"
-                imgUrl={`/images/dog-dark.png`}
-                hoverImgUrl={`/images/dog.png`}
+                imgUrl={`/images/icons/dog-dark.png`}
+                hoverImgUrl={`/images/icons/dog.png`}
               />
               <Button variant="primary" size="big">
                 不拘
@@ -43,7 +43,7 @@ function Aside() {
             <div className="flex flex-wrap  justify-between">
               <Button variant="primary" size="big">
                 <Image
-                  src="/images/male.png"
+                  src="/images/icons/male.png"
                   alt="male"
                   width={36}
                   height={36}
@@ -52,7 +52,7 @@ function Aside() {
 
               <Button variant="primary" size="big">
                 <Image
-                  src="/images/female.png"
+                  src="/images/icons/female.png"
                   alt="male"
                   width={36}
                   height={36}

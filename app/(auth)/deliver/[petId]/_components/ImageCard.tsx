@@ -42,6 +42,7 @@ export default function ImageCard({
       onSuccess: () => {
         toast.success('更新成功')
         router.refresh()
+        setUploadFile(undefined)
         onSubmit && onSubmit()
       },
     })

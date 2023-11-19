@@ -1,21 +1,31 @@
 'use client'
 
 import { useDeleteModal } from '../../_hooks/useDeleteModal'
+import { useNavigateModal } from '../../_hooks/useNavigateModal'
 import { GetPetsReturnType } from '../_actions/pet'
 import DeliverCard from './DeliverCard'
 import { FillImage } from '@/components/fill-image'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 
-function PetCard({ id, imageUrl, name, city, area }: GetPetsReturnType) {
-  const router = useRouter()
+function PetCard({
+  id,
+  imageUrl,
+  name,
+  city,
+  area,
+  gender,
+  isPublish,
+}: GetPetsReturnType) {
   const { onOpen } = useDeleteModal()
+  const { onOpen: onNavigate } = useNavigateModal()
   const handleDelete = () => {
     onOpen(id)
   }
-  const handleImageClick = () => {}
+  const handleImageClick = () => {
+    onNavigate(id)
+  }
 
   return (
     <>
@@ -34,10 +44,25 @@ function PetCard({ id, imageUrl, name, city, area }: GetPetsReturnType) {
         </div>
         <div className="mt-[7px] flex h-6 w-full items-center justify-between">
           <h2 className="font-bold">{name === null ? '尚未取名' : name}</h2>
-          <Image src="/images/female.png" width={24} height={24} alt="" />
+          {gender !== null ? (
+            <Image
+              src={`/images/icons/${gender === '男生' ? 'male' : 'female'}.png`}
+              width={24}
+              height={24}
+              alt=""
+            />
+          ) : null}
         </div>
-        <div className="h-[21px] w-full truncate text-xs leading-[21px] text-gray-400">
-          {city === null ? '尚未設置地址' : city + area}
+        <div className="flex h-[24px] w-full items-center justify-between">
+          <div className=" w-2/3 truncate text-xs  text-gray-400">
+            {area === null ? '尚未設置地址' : city + area}
+          </div>
+          <Image
+            src={`/images/icons/deliver${isPublish ? '-pink' : ''}.png`}
+            width={24}
+            height={24}
+            alt=""
+          />
         </div>
       </DeliverCard>
     </>

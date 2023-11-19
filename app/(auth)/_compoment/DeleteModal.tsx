@@ -4,6 +4,8 @@ import { useDeleteModal } from '../_hooks/useDeleteModal'
 import Loading from '@/components/loading'
 import { Modal } from '@/components/modals/modal'
 import trpcClient from '@/lib/trpc/trpcClient'
+import { cn } from '@/lib/utils'
+import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
@@ -21,7 +23,6 @@ export default function DeleteModal() {
 
   const onConfirm = () => {
     if (petId === '') return
-    // onClose()
     mutate(petId)
   }
 
@@ -29,7 +30,6 @@ export default function DeleteModal() {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      isLoading={isLoading}
       description="確定要刪除我嗎 ？ಥ_ಥ"
       footer={
         <>
@@ -42,8 +42,14 @@ export default function DeleteModal() {
           <button
             disabled={isLoading}
             onClick={onConfirm}
-            className="flex h-[42px] w-[117px] cursor-pointer items-center justify-center rounded text-info hover:bg-info/10"
+            className={cn(
+              'flex h-[42px] w-[117px] cursor-pointer items-center justify-center rounded text-info hover:bg-info/10',
+              isLoading && 'cursor-not-allowed opacity-50',
+            )}
           >
+            {isLoading && (
+              <Loader2 className="mr-2 h-5 w-5 animate-spin text-info" />
+            )}
             確定
           </button>
         </>

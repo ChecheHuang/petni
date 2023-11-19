@@ -406,4 +406,4 @@ export const catFurColorOptions = [
 ] as const
 export const ageOptions = ['幼齡', '成年'] as const
 export const genderOptions = ['男', '女', 'unknown'] as const
-export const categoryOptions = ['貓', '狗'] as const
+export const categoryOptions = ['貓', '犬'] as const

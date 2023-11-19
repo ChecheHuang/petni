@@ -7,6 +7,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from '@/components/ui/dialog'
+import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 interface ModalProps {
@@ -42,7 +43,7 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
       <DialogContent className=" flex h-[156px] w-[472px] flex-col items-center  ">
-        {isLoading && <Loading className="absolute w-full" />}
+        {/* {isLoading && <Loading className="absolute w-full" />} */}
         <DialogDescription className="mt-[39px]">
           {description}
         </DialogDescription>

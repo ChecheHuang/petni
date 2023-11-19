@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils'
 import React from 'react'
 
 type CategoryGenderCardProps = {
-  setGender: (gender: '男' | '女' | '不明') => void
-  setCategory: (category: '貓' | '狗') => void
+  setGender: (gender: '男生' | '女生' | '不明') => void
+  setCategory: (category: '貓' | '犬') => void
 } & Pick<GetPetReturnType, 'category' | 'gender'>
 
 export default function CategoryGenderCard({
@@ -29,8 +29,8 @@ export default function CategoryGenderCard({
             imgWidth={36}
             imgHeight={36}
             alt="cat"
-            imgUrl={`/images/cat-dark.png`}
-            hoverImgUrl={`/images/cat.png`}
+            imgUrl={`/images/icons/cat-dark.png`}
+            hoverImgUrl={`/images/icons/cat.png`}
             isActive={category === '貓'}
             onClick={() => setCategory('貓')}
           />
@@ -39,10 +39,10 @@ export default function CategoryGenderCard({
             imgWidth={36}
             imgHeight={36}
             alt="dog"
-            imgUrl={`/images/dog-dark.png`}
-            hoverImgUrl={`/images/dog.png`}
-            isActive={category === '狗'}
-            onClick={() => setCategory('狗')}
+            imgUrl={`/images/icons/dog-dark.png`}
+            hoverImgUrl={`/images/icons/dog.png`}
+            isActive={category === '犬'}
+            onClick={() => setCategory('犬')}
           />
         </div>
       </div>
@@ -56,18 +56,18 @@ export default function CategoryGenderCard({
             imgWidth={36}
             imgHeight={36}
             alt="male"
-            imgUrl="/images/male.png"
-            isActive={gender === '男'}
-            onClick={() => setGender('男')}
+            imgUrl="/images/icons/male.png"
+            isActive={gender === '男生'}
+            onClick={() => setGender('男生')}
           />
           <ImageButton
             className="h-[60px] w-[60px]"
             imgWidth={36}
             imgHeight={36}
             alt="male"
-            imgUrl="/images/female.png"
-            isActive={gender === '女'}
-            onClick={() => setGender('女')}
+            imgUrl="/images/icons/female.png"
+            isActive={gender === '女生'}
+            onClick={() => setGender('女生')}
           />
           <CustomButton
             className={cn(
