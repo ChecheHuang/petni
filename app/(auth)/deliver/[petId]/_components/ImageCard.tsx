@@ -64,7 +64,7 @@ export default function ImageCard({
           <section>
             <label
               {...getRootProps()}
-              className="relative flex h-[264.47px] w-[205.19px] cursor-pointer items-center justify-center "
+              className="relative flex h-[264.47px] w-[205.19px] cursor-pointer items-center justify-center overflow-hidden rounded-[28px] "
             >
               <FillImage className="rounded-[28px] " src={imageUrl} />
               <Loading

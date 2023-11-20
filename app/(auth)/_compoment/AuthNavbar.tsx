@@ -8,10 +8,12 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 function AuthNavbar({
+  name = 'CN',
   image,
   className,
   ...rest
 }: {
+  name: string
   image: string
 } & React.HTMLAttributes<HTMLElement>) {
   const router = useRouter()
@@ -31,7 +33,7 @@ function AuthNavbar({
       >
         <Avatar>
           <AvatarImage src={image} alt="" />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarFallback>{name}</AvatarFallback>
         </Avatar>
         登出
       </Button>

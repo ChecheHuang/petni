@@ -393,7 +393,7 @@ export const dogFurColorOptions = [
   '黃',
   '虎斑',
   '灰',
-] as const
+]
 export const catFurColorOptions = [
   '白',
   '黑',
@@ -403,7 +403,7 @@ export const catFurColorOptions = [
   '三色',
   '玳瑁',
   '灰白',
-] as const
-export const ageOptions = ['幼齡', '成年'] as const
-export const genderOptions = ['男', '女', 'unknown'] as const
-export const categoryOptions = ['貓', '犬'] as const
+]
+export const ageOptions = ['幼齡', '成年']
+export const genderOptions = ['男生', '女生', '不明']
+export const categoryOptions = ['貓', '犬']

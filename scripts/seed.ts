@@ -1,44 +1,13 @@
-import { getRandomCatImage, getRandomDogImage } from './seedFn'
+import {
+  getRandomCatImage,
+  getRandomDogImage,
+  generateCreatePets,
+} from './seedFn'
 import { PrismaClient } from '@prisma/client'
 
 const prismadb = new PrismaClient()
 
 const initSeed = async () => {
-  // const pets = {
-  //   create: [
-  //     {
-  //       imageUrl: '/images/seed/cat.png',
-  //       category: '貓',
-  //       gender: '女生',
-  //       age: '幼齡',
-  //       furColor: '橘',
-  //       phone: '0912345678',
-  //       city: '新北市',
-  //       area: '板橋區',
-  //       name: '我是貓貓',
-  //       description:
-  //         '我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓我是貓貓',
-  //       isPublish: true,
-  //     },
-  //     {
-  //       imageUrl: '/images/seed/dog.png',
-  //       category: '犬',
-  //       gender: '男生',
-  //       age: '成年',
-  //       furColor: '雙色',
-  //       phone: '0912345678',
-  //       city: '臺北市',
-  //       area: '中正區',
-  //       name: '我是狗狗',
-  //       description:
-  //         '我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗我是狗狗',
-  //       isPublish: true,
-  //     },
-  //     {
-  //       imageUrl: '/images/seed/dog2.png',
-  //     },
-  //   ],
-  // }
   // const users = [
   //   {
   //     id: 'clp48hll300005863g9fm6pfo',
@@ -80,11 +49,16 @@ const initSeed = async () => {
   //     data: user,
   //   })
   // }
-
-  const dog = await getRandomDogImage()
-  // console.log(dog)
-  const cat = await getRandomCatImage()
-  console.log(cat)
+  const pets = await generateCreatePets(20)
+  const user = {
+    id: 'test',
+    name: 'name',
+    email: 'email',
+    pets,
+  }
+  await prismadb.user.create({
+    data: user,
+  })
 }
 
 const reset = async () => {

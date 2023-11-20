@@ -8,6 +8,16 @@ const nextConfig = {
         hostname: 'utfs.io',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn2.thecatapi.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.dog.ceo',
+        pathname: '**',
+      },
     ],
   },
 }

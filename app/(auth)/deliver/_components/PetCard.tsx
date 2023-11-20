@@ -27,6 +27,12 @@ function PetCard({
     onNavigate(id)
   }
 
+  const genderPath = {
+    男生: 'male',
+    女生: 'female',
+    不明: 'unknown',
+  }
+
   return (
     <>
       <DeliverCard className="flex flex-col items-center p-3 ">
@@ -43,14 +49,17 @@ function PetCard({
           />
         </div>
         <div className="mt-[7px] flex h-6 w-full items-center justify-between">
-          <h2 className="font-bold">{name === null ? '尚未取名' : name}</h2>
+          <h2 className="truncate font-bold">
+            {name === null ? '尚未取名' : name}
+          </h2>
           {gender !== null ? (
-            <Image
-              src={`/images/icons/${gender === '男生' ? 'male' : 'female'}.png`}
-              width={24}
-              height={24}
-              alt=""
-            />
+            <div className="h-[24px] w-[24px]">
+              <FillImage
+                src={`/images/icons/${
+                  genderPath[gender as keyof typeof genderPath]
+                }.png`}
+              />
+            </div>
           ) : null}
         </div>
         <div className="flex h-[24px] w-full items-center justify-between">
