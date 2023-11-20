@@ -30,8 +30,6 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-
-
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -44,11 +42,11 @@ model User {
   updatedAt DateTime @updatedAt
 
   accounts Account[]
-  pets      Pet[]
+  pets     Pet[]
 }
 
 model Pet {
-  id          String        @id @default(cuid())
+  id          String  @id @default(cuid())
   imageUrl    String
   category    String?
   furColor    String?
@@ -56,14 +54,22 @@ model Pet {
   age         String?
   name        String?
   phone       String?
-  city        String? 
+  city        String?
   area        String?
   description String?
-  isPublish   Boolean       @default(false)
+  isPublish   Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model AnimalHospital {
+  id          String  @id @default(cuid())
+  area        String
+  city        String
+  phone       String
+  isEmergency Boolean @default(false)
 }
