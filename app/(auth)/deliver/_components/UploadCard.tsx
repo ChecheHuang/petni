@@ -46,12 +46,10 @@ function UploadCard() {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger>
         <DeliverCard className="flex  flex-col items-center justify-center gap-2.5 ">
-          <Image
-            src={'/images/deliver/Vector.png'}
-            alt="deliver"
-            width={56}
-            height={56}
-          />
+          <div className="h-[56px] w-[56px]">
+            <FillImage src={'/images/deliver/Vector.png'} />
+          </div>
+
           <div className="text-sm text-info">上傳寵物照片</div>
         </DeliverCard>
       </DialogTrigger>

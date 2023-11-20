@@ -13,7 +13,6 @@ type FillImageProps = OverRide<
 
 export function FillImage({
   className,
-  onClick,
   src: defaultSrc,
   alt = '',
   ...rest
@@ -25,32 +24,19 @@ export function FillImage({
   }, [defaultSrc])
 
   return (
-    <div className={cn('w-full  overflow-hidden', className)} onClick={onClick}>
-      <Image
-        placeholder="blur"
-        blurDataURL={loseImgUrl}
-        src={src}
-        alt={alt}
-        width="0"
-        height="0"
-        sizes="100vw"
-        style={{ width: '100%', height: 'auto' }}
-        onError={() => setSrc(loseImgUrl)}
-        {...rest}
-      />
-    </div>
+    <Image
+      placeholder="blur"
+      blurDataURL={loseImgUrl}
+      src={src}
+      alt={alt}
+      width="0"
+      height="0"
+      sizes="100vw"
+      style={{ width: '100%', height: 'auto' }}
+      onError={() => setSrc(loseImgUrl)}
+      {...rest}
+    />
   )
 }
 
-export function FillImage1({
-  className,
-  src,
-  alt = '',
-  ...rest
-}: FillImageProps) {
-  return (
-    <div className={cn('relative z-10  overflow-hidden ', className)}>
-      <Image src={src} alt={alt} layout="fill" {...rest} />
-    </div>
-  )
-}
+
