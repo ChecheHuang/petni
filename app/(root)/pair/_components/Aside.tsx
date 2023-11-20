@@ -6,6 +6,7 @@ import CustomButton from '@/components/buttons/CustomButton'
 import { Button } from '@/components/ui/button'
 import { FormControl, FormField, Form } from '@/components/ui/form'
 import { Switch } from '@/components/ui/switch'
+import { catFurColorOptions, dogFurColorOptions } from '@/config/options'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -35,6 +36,8 @@ function Aside() {
     defaultValues: initData,
   })
   const { category, gender, age, furColor } = form.watch()
+  const options = category === '貓' ? catFurColorOptions : dogFurColorOptions
+
   const setValue = (name: keyof SettingFormType) => (value: string) => {
     form.setValue(name, value)
   }
@@ -135,30 +138,30 @@ function Aside() {
                 })}
               </div>
             </div>
-            <div>
-              <h1 className=" mb-2 font-medium">顏色</h1>
-              <div className="flex flex-wrap  justify-between gap-3">
-                {[
-                  '白犬',
-                  '黑犬',
-                  '紅棕犬',
-                  '雙色犬',
-                  '三色犬',
-                  '黃犬',
-                  '虎斑犬',
-                  '灰犬',
-                  '不拘',
-                ].map((option) => (
+            {category === '犬' || category === '貓' ? (
+              <div>
+                <h1 className=" mb-2 font-medium">顏色</h1>
+                <div className="flex flex-wrap  justify-between gap-3">
+                  {options.map((option) => (
+                    <CustomButton
+                      key={option}
+                      value={option}
+                      text={option + category}
+                      activeValue={furColor}
+                      onClick={setValue('furColor')}
+                      size="normal"
+                    />
+                  ))}
                   <CustomButton
-                    key={option}
-                    value={option}
+                    value="不拘"
                     activeValue={furColor}
                     onClick={setValue('furColor')}
                     size="normal"
                   />
-                ))}
+                </div>
               </div>
-            </div>
+            ) : null}
+
             <div className="mt-2 flex justify-between">
               <h1 className=" font-medium">搜尋附近</h1>
               <FormField
