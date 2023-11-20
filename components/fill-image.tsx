@@ -12,7 +12,6 @@ type FillImageProps = OverRide<
 >
 
 export function FillImage({
-  className,
   src: defaultSrc,
   alt = '',
   ...rest
@@ -38,5 +37,3 @@ export function FillImage({
     />
   )
 }
-
-

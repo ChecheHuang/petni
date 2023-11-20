@@ -3,6 +3,10 @@ import prismadb from '@/lib/prismadb'
 import { notFound } from 'next/navigation'
 
 export const getPets = async () => {
+  const session = await getUserAuth()
+  if (!session) throw new Error('Unauthorized')
+
+  const userId = session.user.id as string
   const pets = await prismadb.pet.findMany({
     select: {
       id: true,
@@ -12,6 +16,9 @@ export const getPets = async () => {
       area: true,
       gender: true,
       isPublish: true,
+    },
+    where: {
+      userId,
     },
   })
   return pets
