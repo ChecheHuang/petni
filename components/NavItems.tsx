@@ -1,3 +1,4 @@
+import { FillImage } from './fill-image'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -64,14 +65,10 @@ function NavItem({
       ? `/images/icons/${alias}-pink.png`
       : `/images/icons/${alias}.png`
   return (
-    <Link ref={hoverRef} className="group flex gap-2 " href={href}>
-      <Image
-        src={imgUrl}
-        alt={alias}
-        width={25}
-        height={25}
-        className="h-[25px] w-[25px]"
-      />
+    <Link ref={hoverRef} className="group flex  gap-2 " href={href}>
+      <div className="h-[25px] w-[25px]">
+        <FillImage src={imgUrl} alt={alias} />
+      </div>
       <span
         className={cn(
           ' overflow-hidden whitespace-nowrap  text-info group-hover:w-auto  ',

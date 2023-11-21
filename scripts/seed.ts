@@ -1,8 +1,5 @@
-import {
-  getRandomCatImage,
-  getRandomDogImage,
-  generateCreatePets,
-} from './seedFn'
+import { data as animalHospital } from './animalHospital'
+import { generateCreatePets } from './seedFn'
 import { PrismaClient } from '@prisma/client'
 
 const prismadb = new PrismaClient()
@@ -58,6 +55,9 @@ const initSeed = async () => {
   }
   await prismadb.user.create({
     data: user,
+  })
+  await prismadb.animalHospital.createMany({
+    data: animalHospital,
   })
 }
 

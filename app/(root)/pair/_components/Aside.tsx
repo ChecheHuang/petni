@@ -59,8 +59,6 @@ function Aside() {
               <div className="flex flex-wrap  justify-between">
                 <ImageButton
                   size="big"
-                  imgWidth={36}
-                  imgHeight={36}
                   alt="cat"
                   imgUrl={`/images/icons/cat-dark.png`}
                   hoverImgUrl={`/images/icons/cat.png`}
@@ -71,8 +69,7 @@ function Aside() {
                 />
                 <ImageButton
                   size="big"
-                  imgWidth={36}
-                  imgHeight={36}
+                 
                   alt="cat"
                   imgUrl={`/images/icons/dog-dark.png`}
                   hoverImgUrl={`/images/icons/dog.png`}
@@ -96,18 +93,14 @@ function Aside() {
               <div className="flex flex-wrap  justify-between">
                 <ImageButton
                   size="big"
-                  imgWidth={36}
-                  imgHeight={36}
-                  alt="male"
+                
                   imgUrl="/images/icons/male.png"
                   isActive={gender === '男生'}
                   onClick={() => setValue('gender')('男生')}
                 />
                 <ImageButton
                   size="big"
-                  imgWidth={36}
-                  imgHeight={36}
-                  alt="male"
+                  
                   imgUrl="/images/icons/female.png"
                   isActive={gender === '女生'}
                   onClick={() => setValue('gender')('女生')}

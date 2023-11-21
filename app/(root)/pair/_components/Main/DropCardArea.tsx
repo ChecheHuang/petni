@@ -1,5 +1,5 @@
+import { FillImage } from '@/components/fill-image'
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 import React from 'react'
 
 function DropCardArea() {
@@ -19,10 +19,10 @@ function DropCardArea() {
       />
       <div
         className={cn(
-          'box-content  h-[444.23px] w-[276.79px]  rotate-[-3deg] overflow-hidden  rounded-[32px] border-[0.9375vw] border-white  bg-gradient-to-b from-slate-100 to-black shadow-[-6px_9px_11px_0px_#00000040]',
+          'box-content  flex h-[444.23px]  w-[276.79px] rotate-[-3deg]  items-center justify-center overflow-hidden  rounded-[32px] border-[0.9375vw] border-white bg-gradient-to-b from-slate-100 to-black shadow-[-6px_9px_11px_0px_#00000040]',
         )}
       >
-        <Image src="/images/main/dogImg.png" fill objectFit="contain" alt="" />
+        <FillImage src="/images/main/dogImg.png" alt="" />
       </div>
     </div>
   )

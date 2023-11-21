@@ -27,7 +27,7 @@ function PetCard({
     onNavigate(id)
   }
 
-  const genderPath = {
+  const genderMap = {
     男生: 'male',
     女生: 'female',
     不明: 'unknown',
@@ -56,7 +56,7 @@ function PetCard({
             <div className="h-[24px] w-[24px]">
               <FillImage
                 src={`/images/icons/${
-                  genderPath[gender as keyof typeof genderPath]
+                  genderMap[gender as keyof typeof genderMap]
                 }.png`}
               />
             </div>
@@ -66,12 +66,11 @@ function PetCard({
           <div className=" w-2/3 truncate text-xs  text-gray-400">
             {area === null ? '尚未設置地址' : city + area}
           </div>
-          <Image
-            src={`/images/icons/deliver${isPublish ? '-pink' : ''}.png`}
-            width={24}
-            height={24}
-            alt=""
-          />
+          <div className="h-[24px] w-[24px]">
+            <FillImage
+              src={`/images/icons/deliver${isPublish ? '-pink' : ''}.png`}
+            />
+          </div>
         </div>
       </DeliverCard>
     </>

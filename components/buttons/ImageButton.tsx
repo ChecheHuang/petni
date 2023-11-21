@@ -1,13 +1,12 @@
 'use client'
 
+import { FillImage } from '../fill-image'
 import { Button, ButtonProps } from '@/components/ui/button'
 import Image from 'next/image'
 import React, { useRef } from 'react'
 import { useHover } from 'usehooks-ts'
 
 interface ImageButtonProps extends ButtonProps {
-  imgWidth: number
-  imgHeight: number
   alt?: string
   imgUrl: string
   hoverImgUrl?: string
@@ -15,8 +14,6 @@ interface ImageButtonProps extends ButtonProps {
 }
 
 function ImageButton({
-  imgWidth,
-  imgHeight,
   alt = '/',
   imgUrl,
   hoverImgUrl = imgUrl,
@@ -32,13 +29,9 @@ function ImageButton({
       ref={hoverRef}
       {...props}
     >
-      <Image
-        src={isHover || isActive ? hoverImgUrl : imgUrl}
-        sizes="100vw"
-        width={imgWidth}
-        height={imgHeight}
-        alt={alt}
-      />
+      <div className="h-[36px] w-[36px]">
+        <FillImage src={isHover || isActive ? hoverImgUrl : imgUrl} alt={alt} />
+      </div>
     </Button>
   )
 }

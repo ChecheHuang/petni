@@ -68,8 +68,10 @@ model Pet {
 
 model AnimalHospital {
   id          String  @id @default(cuid())
+  name        String
   area        String
   city        String
   phone       String
+  address     String
   isEmergency Boolean @default(false)
 }
