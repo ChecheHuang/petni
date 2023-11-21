@@ -1,17 +1,21 @@
-const getData = async () => {
-  const res = await fetch(
-    `https://opendata.hccg.gov.tw/API/v3/Rest/OpenData/1F91157DE4066E06?take=10&skip=0`,
-    { cache: 'force-cache' },
-  )
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+import { getAnimalHospitalList } from './_action/animalHospital'
+import SelectButtons from './_components/SelectButtons'
+
+interface EmergencyPageProps {
+  searchParams: {
+    area: string
   }
-
-  return res.json()
 }
 
-async function Page() {
-  return <div>Page</div>
+async function EmergencyPage({ searchParams: { area } }: EmergencyPageProps) {
+  const animalHospitalList = await getAnimalHospitalList(area)
+
+  return (
+    <div>
+      <SelectButtons />
+      {animalHospitalList.length}
+    </div>
+  )
 }
 
-export default Page
+export default EmergencyPage

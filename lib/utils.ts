@@ -1,6 +1,4 @@
 import { type ClassValue, clsx } from 'clsx'
-import fs from 'fs'
-import path from 'path'
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
@@ -62,16 +60,4 @@ export function logClient(data: Record<string, any>): void {
       
     </script>
   `)
-}
-export function logServer(json: any, filename = 'output.json') {
-  const filePath = path.join(__dirname, filename)
-  const jsonString = JSON.stringify(json, null, 2)
-
-  fs.writeFile(filePath, jsonString, (err) => {
-    if (err) {
-      console.error('Error writing JSON to file:', err)
-    } else {
-      console.log('JSON written to file successfully.')
-    }
-  })
 }
