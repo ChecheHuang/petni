@@ -3,6 +3,7 @@ import DeleteModal from './_compoment/DeleteModal'
 import NavigateModal from './_compoment/NavigateModal'
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import SimpleBar from '@/components/SimpleBar'
 import { redirect } from 'next/navigation'
 import React from 'react'
 
@@ -24,7 +25,11 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
             />
           </MaxWidthWrapper>
         </header>
-        <MaxWidthWrapper>{children}</MaxWidthWrapper>
+        <main className="h-[calc(100vh-77.53px)]">
+          <SimpleBar>
+            <MaxWidthWrapper>{children}</MaxWidthWrapper>
+          </SimpleBar>
+        </main>
       </div>
     </>
   )

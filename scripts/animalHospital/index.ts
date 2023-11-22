@@ -9,3 +9,11 @@ export const data = [...台北市, ...台中市, ...台南市, ...花蓮縣].map
     isEmergency: Math.random() < 0.4,
   }),
 )
+
+export const copyArr = <T>(array: T[], copyTime = 1): T[] => {
+  const result = [] as T[]
+  for (let i = 0; i < copyTime; i++) {
+    result.push(...array)
+  }
+  return result
+}

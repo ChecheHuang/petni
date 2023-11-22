@@ -27,19 +27,27 @@ const SelectButtons = () => {
   }
 
   return (
-    <div>
-      {options.map((option) => {
-        const isSelected = area === option
-        return (
-          <Button
-            variant={isSelected ? 'default' : 'outline'}
-            onClick={() => onClick(option)}
-            key={option}
-          >
-            {option}
-          </Button>
-        )
-      })}
+    <div className="flex justify-center   pb-[56px] pt-[42px]">
+      <div className="space-y-[9px]">
+        <div className="space-x-3 ">
+          {options.map((option) => {
+            const isSelected = area === option
+            return (
+              <Button
+                className="h-[38px] w-[95px]"
+                variant={isSelected ? 'info' : 'outline'}
+                onClick={() => onClick(option)}
+                key={option}
+              >
+                {option}
+              </Button>
+            )
+          })}
+        </div>
+        <div className="flex justify-end ">
+          *資訊僅供參考，建議先電話聯絡再前往。
+        </div>
+      </div>
     </div>
   )
 }

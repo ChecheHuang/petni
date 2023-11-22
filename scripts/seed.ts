@@ -1,4 +1,4 @@
-import { data as animalHospital } from './animalHospital'
+import { data as animalHospital, copyArr } from './animalHospital'
 import { generateCreatePets } from './seedFn'
 import { PrismaClient } from '@prisma/client'
 
@@ -56,13 +56,19 @@ const initSeed = async () => {
   await prismadb.user.create({
     data: user,
   })
-  await prismadb.animalHospital.createMany({
-    data: animalHospital,
-  })
+
+  for (const _ of Array(5)) {
+    await prismadb.animalHospital.createMany({
+      data: animalHospital,
+    })
+  }
+  console.log('animalHospital count', await prismadb.animalHospital.count())
 }
 
 const reset = async () => {
-  await prismadb.user.deleteMany()
+  await prismadb['user'].deleteMany()
+  await prismadb['animalHospital'].deleteMany()
+
   await initSeed()
 }
 
