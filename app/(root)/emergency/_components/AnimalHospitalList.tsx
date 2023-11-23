@@ -1,20 +1,26 @@
 'use client'
 
-import { getAnimalHospitalList } from '../_action/animalHospital'
 import AnimalHospitalItem from './AnimalHospitalItem'
 import { FillImage } from '@/components/fill-image'
+import { Button } from '@/components/ui/button'
+import { AnimalHospital } from '@prisma/client'
 import React, { useEffect, useRef, useState } from 'react'
 
+type AnimalHospitalListType = {
+  city: string
+  animalHospitals: AnimalHospital[]
+}
 type AnimalHospitalListProps = {
-  animalHospitalList: AsyncFnReturnType<typeof getAnimalHospitalList>
+  animalHospitalList: AnimalHospitalListType[]
 }
 
 const AnimalHospitalList = ({
   animalHospitalList,
 }: AnimalHospitalListProps) => {
-  const [list, setList] = useState([animalHospitalList[0]])
+  const [list, setList] = useState<AnimalHospitalListType[]>([
+    animalHospitalList[0],
+  ])
   const scrollRef = useRef<HTMLDivElement>(null)
-
   const handleScroll = () => {
     if (scrollRef.current) {
       const containerHeight =
@@ -44,32 +50,45 @@ const AnimalHospitalList = ({
     setList([animalHospitalList[0]])
     scrollRef.current?.scrollTo(0, 0)
   }, [animalHospitalList])
+
+  if (!animalHospitalList.length) return <div>沒有資料</div>
   return (
-    <div
-      ref={scrollRef}
-      className=" scrollbar-hide h-[calc(100vh-77.53px-180px)] overflow-auto px-[88px]"
-    >
-      {list.map(({ city, animalHospitals }, index) => (
-        <div className="space-y-2" key={index}>
-          <div className="flex items-center ">
-            <div className="h-[23px] w-[24px]">
-              <FillImage src="/images/icons/city.png" alt="city" />
+    <>
+      <div
+        ref={scrollRef}
+        className=" scrollbar-hide  h-[calc(100vh-77.53px-180px)] overflow-auto px-[88px]"
+      >
+        {list.map((cityGroup, index) => (
+          <div className="space-y-2" key={index}>
+            <div className="flex items-center ">
+              <div className="h-[23px] w-[24px]">
+                <FillImage src="/images/icons/city.png" alt="city" />
+              </div>
+              <div className="text-xl font-bold">{cityGroup?.city}</div>
             </div>
-            <div className="text-xl font-bold">{city}</div>
+            <div className="grid grid-cols-3 gap-2">
+              {cityGroup?.animalHospitals?.map((animalHospital) => {
+                return (
+                  <AnimalHospitalItem
+                    key={animalHospital.id}
+                    {...animalHospital}
+                  />
+                )
+              })}
+            </div>
           </div>
-          <div className="grid grid-cols-3 gap-2">
-            {animalHospitals.map((animalHospital) => {
-              return (
-                <AnimalHospitalItem
-                  key={animalHospital.id}
-                  {...animalHospital}
-                />
-              )
-            })}
-          </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <Button
+        onClick={() => {
+          scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+        variant="info"
+        className="fixed bottom-[5%] right-[10%] h-16 w-16 rounded-full "
+      >
+        Top
+      </Button>
+    </>
   )
 }
 

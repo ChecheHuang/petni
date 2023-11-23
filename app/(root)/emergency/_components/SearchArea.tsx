@@ -1,37 +1,27 @@
 'use client'
 
+import SearchInput from './SearchInput'
 import { Button } from '@/components/ui/button'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import qs from 'query-string'
+import { useQueryString } from '@/hooks/useHooks'
 import React from 'react'
 
-const SelectButtons = () => {
-  const pathname = usePathname()
-  const router = useRouter()
-  const searchParams = useSearchParams()
+const SearchArea = () => {
   const options = ['北部', '中部', '南部', '東部']
 
-  const area = searchParams.get('area')
-  const onClick = (option: string) => {
-    const url = qs.stringifyUrl(
-      {
-        url: pathname,
-        query: {
-          area: option,
-        },
-      },
-      { skipNull: true, skipEmptyString: true },
-    )
+  const { setSearchParams, reset, searchParams } = useQueryString()
 
-    router.push(url)
+  const onClick = (option: string) => {
+    setSearchParams({
+      area: option,
+    })
   }
 
   return (
-    <div className="flex justify-center   pb-[56px] pt-[42px]">
+    <div className="flex justify-center py-[16px]">
       <div className="space-y-[9px]">
         <div className="space-x-3 ">
           {options.map((option) => {
-            const isSelected = area === option
+            const isSelected = searchParams.area === option
             return (
               <Button
                 className="h-[38px] w-[95px]"
@@ -44,6 +34,10 @@ const SelectButtons = () => {
             )
           })}
         </div>
+        <div className="flex  justify-between gap-3">
+          <SearchInput className="w-full" />
+          <Button onClick={reset}>Reset</Button>
+        </div>
         <div className="flex justify-end ">
           *資訊僅供參考，建議先電話聯絡再前往。
         </div>
@@ -52,4 +46,4 @@ const SelectButtons = () => {
   )
 }
 
-export default SelectButtons
+export default SearchArea

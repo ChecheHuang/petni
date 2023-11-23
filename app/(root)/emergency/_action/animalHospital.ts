@@ -1,12 +1,22 @@
 import prismadb from '@/lib/prismadb'
 import { AnimalHospital } from '@prisma/client'
 
-export const getAnimalHospitalList = async (area: string) => {
+export const getAnimalHospitalList = async ({
+  area,
+  hospital,
+}: {
+  area: string
+  hospital: string
+}) => {
   const animalHospitals = await prismadb.animalHospital.findMany({
     where: {
       area,
+      name: {
+        contains: hospital,
+      },
     },
   })
+  // console.log(animalHospitals)
   const map = {} as Record<string, any>
   const result = animalHospitals.reduce(
     (acc, cur) => {

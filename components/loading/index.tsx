@@ -1,3 +1,5 @@
+'use client'
+
 import loadingAnimate from './毛線球_loading.json'
 import { cn } from '@/lib/utils'
 import Lottie from 'lottie-react'
