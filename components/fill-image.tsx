@@ -14,6 +14,7 @@ type FillImageProps = OverRide<
 export function FillImage({
   src: defaultSrc,
   alt = '',
+  className,
   ...rest
 }: FillImageProps) {
   const loseImgUrl = '/images/loseImg.png'
@@ -24,6 +25,7 @@ export function FillImage({
 
   return (
     <Image
+      className={className}
       placeholder="blur"
       blurDataURL={loseImgUrl}
       src={src}
