@@ -61,6 +61,31 @@ function Card() {
         src="/images/main/dogImg.png"
         alt=""
       />
+      <div className="absolute bottom-12 left-1/2  flex h-[54px] w-[245px]  -translate-x-[115px]  transform items-center justify-between">
+        <div
+          onClick={handleDisLike}
+          className="flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full bg-white"
+        >
+          <X />
+        </div>
+        <div className="min-w-[94px] text-white">
+          <div className="flex items-center justify-between text-lg ">
+            123123
+            <span className="h-[24px] w-[24px]">
+              <FillImage src="/images/icons/female.png" />
+            </span>
+          </div>
+          <div className="text-sm">我是地址</div>
+        </div>
+        <div
+          onClick={handleLike}
+          className="flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full bg-white"
+        >
+          <div className="h-[31px] w-[31px]">
+            <FillImage src="/images/icons/love_S.png" />
+          </div>
+        </div>
+      </div>
     </motion.div>
   )
 }
