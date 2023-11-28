@@ -1,6 +1,7 @@
 'use client'
 
 import ImageButton from '../../../../components/buttons/ImageButton'
+import { useSheet } from './MobileSidebar'
 import SimpleBar from '@/components/SimpleBar'
 import CustomButton from '@/components/buttons/CustomButton'
 import { Button } from '@/components/ui/button'
@@ -33,6 +34,7 @@ type SettingFormType = {
 
 function Sidebar({ className }: { className?: string }) {
   const { data: initData, setData } = useFilterPet()
+  const { setIsOpen } = useSheet()
   const form = useForm<SettingFormType>({
     defaultValues: initData,
   })
@@ -45,6 +47,7 @@ function Sidebar({ className }: { className?: string }) {
   function onSubmit(values: SettingFormType) {
     setData(values)
     toast.success('套用成功')
+    setIsOpen(false)
   }
 
   return (

@@ -8,7 +8,7 @@ function Home() {
     <>
       <div className="flex flex-wrap">
         <Sidebar className="hidden md:flex md:h-[calc(100vh-77.53px)]  md:w-[413px] md:pl-[87px]" />
-        <MobileSidebar />
+        <MobileSidebar className="md:hidden" />
         <Main />
       </div>
     </>
