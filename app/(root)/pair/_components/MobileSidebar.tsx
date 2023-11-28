@@ -24,15 +24,14 @@ export const useSheet = create<useSheetStore>((set) => ({
   setIsOpen: (isOpen) => set({ isOpen }),
 }))
 
-export const MobileSidebar = ({ className }: { className?: string }) => {
+export const MobileSidebar = () => {
   const { isOpen, setIsOpen } = useSheet()
 
   return (
     <>
       <div
         className={cn(
-          'fixed top-0 z-10 flex h-[62px]  w-screen items-center justify-between  bg-white px-4 ',
-          className,
+          'fixed top-0 z-10 flex h-[62px]  w-full items-center justify-between   bg-white px-4 ',
         )}
       >
         <div className="h-[46px] w-[46px] cursor-pointer ">
@@ -43,7 +42,7 @@ export const MobileSidebar = ({ className }: { className?: string }) => {
           <SheetTrigger className=" h-[38px] w-[38px] transition hover:opacity-75 ">
             <FillImage src="/images/icons/filter.png" />
           </SheetTrigger>
-          <SheetContent side="right" className="w-[360px] bg-white p-0">
+          <SheetContent side="right" className="w-screen bg-white p-0">
             <SheetHeader>
               <div className="flex h-[62px] w-full items-center justify-between bg-white">
                 <FaAngleLeft
@@ -58,7 +57,7 @@ export const MobileSidebar = ({ className }: { className?: string }) => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className="h-[62px] w-screen bg-black">123123</div>
+      <div className={cn('h-[62px] w-full bg-black')}>123123</div>
     </>
   )
 }

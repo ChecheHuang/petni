@@ -4,7 +4,7 @@ import React from 'react'
 
 function BottomArea() {
   return (
-    <div className=" flex h-[120px] items-center justify-around">
+    <div className="hidden h-[120px] items-center justify-around md:flex">
       <Item />
       <Item />
       <Item />

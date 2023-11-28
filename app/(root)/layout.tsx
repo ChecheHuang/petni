@@ -13,11 +13,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar className="hidden md:flex " />
       <MobileNavbar />
       <main className="h-[calc(100vh-77.53px)]">
-        <Suspense fallback={<Loading />}>
-          <SimpleBar>
-            <MaxWidthWrapper>{children}</MaxWidthWrapper>
-          </SimpleBar>
-        </Suspense>
+        {/* <Suspense fallback={<Loading />}> */}
+        <SimpleBar>
+          <MaxWidthWrapper>{children}</MaxWidthWrapper>
+        </SimpleBar>
+        {/* </Suspense> */}
       </main>
     </>
   )
