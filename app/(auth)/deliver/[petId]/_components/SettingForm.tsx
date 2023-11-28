@@ -1,6 +1,6 @@
 'use client'
 
-import { GetPetReturnType } from '../../_actions/pet'
+import { GetPetReturnType } from '../../../../../actions/pet'
 import AgeCard from './AgeCard'
 import CategoryGenderCard from './CategoryGenderCard'
 import ContactCard from './ContactCard'

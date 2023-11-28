@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { FormControl, FormField, Form } from '@/components/ui/form'
 import { Switch } from '@/components/ui/switch'
 import { catFurColorOptions, dogFurColorOptions } from '@/config/options'
+import { cn } from '@/lib/utils'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -30,7 +31,7 @@ type SettingFormType = {
   isSound: boolean
 }
 
-function Aside() {
+function Sidebar({ className }: { className?: string }) {
   const { data: initData, setData } = useFilterPet()
   const form = useForm<SettingFormType>({
     defaultValues: initData,
@@ -47,11 +48,17 @@ function Aside() {
   }
 
   return (
-    <div className=" h-[calc(100vh-77.53px)] w-[413px]   bg-[#FAFAFA]  pl-[87px] shadow-[0px_2px_7px_0px_#0A0A0A12] ">
+    <div
+      className={cn(
+        'relative h-full w-[screen]  bg-[#FAFAFA]  shadow-[0px_2px_7px_0px_#0A0A0A12]  ',
+        'md:h-[calc(100vh-77.53px)]  md:w-[413px] md:pl-[87px]',
+        className,
+      )}
+    >
       <SimpleBar>
         <Form {...form}>
           <form
-            className="mb-4 flex flex-col gap-2 px-3"
+            className="flex flex-col gap-2 px-3"
             onSubmit={form.handleSubmit(onSubmit)}
           >
             <div>
@@ -69,7 +76,6 @@ function Aside() {
                 />
                 <ImageButton
                   size="big"
-                 
                   alt="cat"
                   imgUrl={`/images/icons/dog-dark.png`}
                   hoverImgUrl={`/images/icons/dog.png`}
@@ -93,14 +99,12 @@ function Aside() {
               <div className="flex flex-wrap  justify-between">
                 <ImageButton
                   size="big"
-                
                   imgUrl="/images/icons/male.png"
                   isActive={gender === '男生'}
                   onClick={() => setValue('gender')('男生')}
                 />
                 <ImageButton
                   size="big"
-                  
                   imgUrl="/images/icons/female.png"
                   isActive={gender === '女生'}
                   onClick={() => setValue('gender')('女生')}
@@ -189,7 +193,10 @@ function Aside() {
                 }}
               />
             </div>
-            <Button type="submit" className="mt-2">
+            <Button
+              type="submit"
+              className={cn('sticky bottom-0   ', ' md:mt-2')}
+            >
               套用
             </Button>
           </form>
@@ -199,4 +206,4 @@ function Aside() {
   )
 }
 
-export default Aside
+export default Sidebar

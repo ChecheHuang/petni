@@ -1,6 +1,6 @@
 import ImageCard from './_components/ImageCard'
 import SettingForm from './_components/SettingForm'
-import { getPet } from '@/app/(auth)/deliver/_actions/pet'
+import { getPet } from '@/actions/pet'
 import React from 'react'
 
 async function PetIdPage({ params: { petId } }: { params: { petId: string } }) {

@@ -1,4 +1,4 @@
-import { getPet } from '../../_actions/pet'
+import { getPet } from '../../../../actions/pet'
 import { FillImage } from '@/components/fill-image'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'

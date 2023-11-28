@@ -23,7 +23,7 @@ export const getPets = async () => {
   })
   return pets
 }
-export type GetPetsReturnType = GetArrType<AsyncFnReturnType<typeof getPets>>
+export type GetPetsReturnType = GetArrType<GetAsyncFnReturnType<typeof getPets>>
 
 export const getPet = async (petId: string) => {
   const session = await getUserAuth()
@@ -54,4 +54,4 @@ export const getPet = async (petId: string) => {
 
   return pet
 }
-export type GetPetReturnType = AsyncFnReturnType<typeof getPet>
+export type GetPetReturnType = GetAsyncFnReturnType<typeof getPet>

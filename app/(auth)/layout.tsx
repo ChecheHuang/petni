@@ -17,7 +17,7 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
       <DeleteModal />
       <NavigateModal />
       <div className="min-h-screen ">
-        <header className="sticky top-0 z-10 bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
+        <header className="fixed top-0 z-10 bg-[#FFFFFF] shadow-[0px_1px_9px_0px_#2626260D]  ">
           <MaxWidthWrapper className="h-[77.53px]">
             <AuthNavbar
               image={session?.user?.image as string}

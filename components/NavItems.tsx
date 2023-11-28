@@ -35,7 +35,7 @@ function NavItems() {
     },
   ]
   return (
-    <div className="grid w-[470px] grid-cols-5 items-center justify-items-center ">
+    <div className="grid w-full grid-cols-5 items-center justify-items-center md:w-[470px] ">
       {routes.map((route) => (
         <NavItem key={route.alias} {...route} />
       ))}
@@ -74,6 +74,7 @@ function NavItem({
           ' overflow-hidden whitespace-nowrap  text-info group-hover:w-auto  ',
           'transition-all ',
           active ? 'w-auto' : 'w-0 ',
+          'hidden md:flex ',
         )}
       >
         {label}

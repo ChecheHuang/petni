@@ -1,8 +1,8 @@
 'use client'
 
+import { GetPetsReturnType } from '../../../../actions/pet'
 import { useDeleteModal } from '../../_hooks/useDeleteModal'
 import { useNavigateModal } from '../../_hooks/useNavigateModal'
-import { GetPetsReturnType } from '../_actions/pet'
 import DeliverCard from './DeliverCard'
 import { FillImage } from '@/components/fill-image'
 import { X } from 'lucide-react'

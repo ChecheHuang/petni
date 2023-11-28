@@ -1,4 +1,4 @@
-import { GetPetReturnType } from '../../_actions/pet'
+import { GetPetReturnType } from '../../../../../actions/pet'
 import CustomButton from '@/components/buttons/CustomButton'
 import ImageButton from '@/components/buttons/ImageButton'
 import { Card } from '@/components/ui/card'

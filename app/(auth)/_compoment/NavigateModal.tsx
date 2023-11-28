@@ -12,7 +12,7 @@ export default function NavigateModal() {
 
   const lookAllPath = '/deliver'
   const editPath = `/deliver/${petId}`
-  const detailsPath = `/deliver/${petId}/details`
+  const detailsPath = `/pair/${petId}`
 
   return (
     <Modal

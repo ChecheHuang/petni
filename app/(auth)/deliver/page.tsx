@@ -1,4 +1,4 @@
-import { getPets, GetPetsReturnType } from './_actions/pet'
+import { getPets, GetPetsReturnType } from '../../../actions/pet'
 import PetCard from './_components/PetCard'
 import UploadCard from './_components/UploadCard'
 
