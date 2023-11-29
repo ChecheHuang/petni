@@ -8,8 +8,6 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet'
-import { cn } from '@/lib/utils'
-import { Menu } from 'lucide-react'
 import { useState } from 'react'
 import { FaAngleLeft } from 'react-icons/fa6'
 import { create } from 'zustand'
@@ -29,11 +27,7 @@ export const MobileSidebar = () => {
 
   return (
     <>
-      <div
-        className={cn(
-          'fixed top-0 z-10 flex h-[62px]  w-full items-center justify-between   bg-white px-4 ',
-        )}
-      >
+      <div className="fixed top-0 z-10 flex h-[62px]  w-full items-center justify-between   bg-white px-4">
         <div className="h-[46px] w-[46px] cursor-pointer ">
           <FillImage src="/images/icons/undo.png" />
         </div>
@@ -57,7 +51,7 @@ export const MobileSidebar = () => {
           </SheetContent>
         </Sheet>
       </div>
-      <div className={cn('h-[62px] w-full bg-black')}>123123</div>
+      <div className="h-[62px] w-full bg-black" />
     </>
   )
 }

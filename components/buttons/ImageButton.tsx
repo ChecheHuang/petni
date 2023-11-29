@@ -2,6 +2,7 @@
 
 import { FillImage } from '../fill-image'
 import { Button, ButtonProps } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import React, { useRef } from 'react'
 import { useHover } from 'usehooks-ts'
@@ -11,6 +12,7 @@ interface ImageButtonProps extends ButtonProps {
   imgUrl: string
   hoverImgUrl?: string
   isActive?: boolean
+  imageClassName?: string
 }
 
 function ImageButton({
@@ -18,6 +20,7 @@ function ImageButton({
   imgUrl,
   hoverImgUrl = imgUrl,
   isActive = false,
+  imageClassName,
   ...props
 }: ImageButtonProps) {
   const hoverRef = useRef(null)
@@ -29,7 +32,12 @@ function ImageButton({
       ref={hoverRef}
       {...props}
     >
-      <div className="h-[36px] w-[36px]">
+      <div
+        className={cn(
+          'flex h-[36px] w-[36px] items-center justify-center',
+          imageClassName,
+        )}
+      >
         <FillImage src={isHover || isActive ? hoverImgUrl : imgUrl} alt={alt} />
       </div>
     </Button>

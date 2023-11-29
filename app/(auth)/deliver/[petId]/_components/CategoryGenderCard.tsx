@@ -1,7 +1,7 @@
 import { GetPetReturnType } from '../../../../../actions/pet'
 import CustomButton from '@/components/buttons/CustomButton'
 import ImageButton from '@/components/buttons/ImageButton'
-import { Card } from '@/components/ui/card'
+import { Card, cardClassName } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import React from 'react'
 
@@ -17,21 +17,23 @@ export default function CategoryGenderCard({
   setCategory,
 }: CategoryGenderCardProps) {
   return (
-    <Card className="flex h-[104px] w-[381px] items-center justify-between rounded-[20px] p-[18px]">
+    <Card className={cn(' flex items-center justify-between ', cardClassName)}>
       <div className="space-y-1.5">
         <div>
           種類<span className="text-info">(*必選)</span>
         </div>
         <div className=" space-x-1">
           <ImageButton
-            className="h-[60px] w-[60px]"
+            className="h-[53px] w-[53px] md:h-[60px] md:w-[60px]"
+            imageClassName="h-[26px] w-[26px] md:h-[36px] md:w-[36px]"
             imgUrl={`/images/icons/cat-dark.png`}
             hoverImgUrl={`/images/icons/cat.png`}
             isActive={category === '貓'}
             onClick={() => setCategory('貓')}
           />
           <ImageButton
-            className="h-[60px] w-[60px]"
+            className="h-[53px] w-[53px] md:h-[60px] md:w-[60px]"
+            imageClassName="h-[26px] w-[26px] md:h-[36px] md:w-[36px]"
             imgUrl={`/images/icons/dog-dark.png`}
             hoverImgUrl={`/images/icons/dog.png`}
             isActive={category === '犬'}
@@ -45,20 +47,22 @@ export default function CategoryGenderCard({
         </div>
         <div className=" flex gap-1">
           <ImageButton
-            className="h-[60px] w-[60px]"
+            className="h-[53px] w-[53px] md:h-[60px] md:w-[60px]"
+            imageClassName="h-[26px] w-[26px] md:h-[36px] md:w-[36px]"
             imgUrl="/images/icons/male.png"
             isActive={gender === '男生'}
             onClick={() => setGender('男生')}
           />
           <ImageButton
-            className="h-[60px] w-[60px]"
+            className="h-[53px] w-[53px] md:h-[60px] md:w-[60px]"
+            imageClassName="h-[26px] w-[26px] md:h-[36px] md:w-[36px]"
             imgUrl="/images/icons/female.png"
             isActive={gender === '女生'}
             onClick={() => setGender('女生')}
           />
           <CustomButton
             className={cn(
-              'h-[60px] w-[60px] ',
+              'h-[53px] w-[53px] md:h-[60px] md:w-[60px]',
               gender !== '不明' && 'text-[#878787]',
             )}
             value={'不明'}

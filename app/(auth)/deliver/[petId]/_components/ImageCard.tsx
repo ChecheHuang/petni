@@ -58,13 +58,13 @@ export default function ImageCard({
     }
   }
   return (
-    <Card className="flex h-[356.47px] w-[237.7px] flex-col gap-2.5 rounded-[28px] p-4 ">
+    <Card className="flex h-[356.47px] w-[237.7px] flex-col gap-2.5 rounded-[28px]  bg-transparent p-4 shadow-none  md:bg-card md:shadow-[0px_2px_7px_0px_#0A0A0A12]">
       <Dropzone multiple={false} onDrop={onDrop}>
         {({ getRootProps, getInputProps, acceptedFiles }) => (
           <section>
             <label
               {...getRootProps()}
-              className="relative flex h-[264.47px] w-[205.19px] cursor-pointer items-center justify-center overflow-hidden rounded-[28px] "
+              className="relative flex h-[264.47px] w-[205.19px] cursor-pointer items-center justify-center overflow-hidden rounded-[28px]  "
             >
               <FillImage className="rounded-[28px] " src={imageUrl} />
               <Loading

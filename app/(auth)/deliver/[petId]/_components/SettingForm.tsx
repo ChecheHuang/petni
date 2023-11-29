@@ -60,11 +60,12 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
   const setValue = (name: keyof FormDataType) => (value: string) => {
     form.setValue(name, value)
   }
+
   return (
     <>
       <Form {...form}>
         <form
-          className="flex gap-[13px] "
+          className="mb-[90px] flex flex-col gap-[13px]  md:mb-0 md:flex-row "
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="space-y-3">

@@ -1,6 +1,6 @@
 import CustomButton from '@/components/buttons/CustomButton'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, cardClassName } from '@/components/ui/card'
 import { Pet } from '@prisma/client'
 import React from 'react'
 
@@ -10,7 +10,7 @@ type AgeCardProps = {
 
 export default function AgeCard({ setAge, age }: AgeCardProps) {
   return (
-    <Card className=" h-[126px] w-[381px]  rounded-[20px] p-[18px]">
+    <Card className={cardClassName}>
       <div className="space-y-1.5">
         <div>
           年齡<span className="text-info">(*必選)</span>

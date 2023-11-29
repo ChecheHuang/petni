@@ -1,7 +1,7 @@
 'use client'
 
 import { FormDataType } from './SettingForm'
-import { Card } from '@/components/ui/card'
+import { Card, cardClassName } from '@/components/ui/card'
 import { FormControl, FormField } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import React from 'react'
@@ -13,7 +13,7 @@ type NameCardProps = {
 
 export default function NameCard({ control }: NameCardProps) {
   return (
-    <Card className=" h-[106px] w-[381px] rounded-[20px] p-[18px]">
+    <Card className={cardClassName}>
       <div className="space-y-1.5">
         <div>牠的名字</div>
         <FormField

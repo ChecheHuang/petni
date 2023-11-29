@@ -1,23 +1,25 @@
 'use client'
 
-import MobileNavbar from './_components/MobileNavbar'
-import Navbar from './_components/Navbar'
+import MobileBottomNavbar from '../../components/Navbar/MobileBottomNavbar'
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
+import Navbar from '@/components/Navbar/Navbar'
 import SimpleBar from '@/components/SimpleBar'
-import Loading from '@/components/loading'
-import { Suspense } from 'react'
+import { FillImage } from '@/components/fill-image'
+import Link from 'next/link'
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <Navbar className="hidden md:flex " />
-      <MobileNavbar />
+      <Navbar>
+        <Link className=" h-[53.53px] w-[118.11px]  " href="/">
+          <FillImage src="/images/logo.png" alt="logo" priority />
+        </Link>
+      </Navbar>
+      <MobileBottomNavbar />
       <main className="h-[calc(100vh-77.53px)]">
-        {/* <Suspense fallback={<Loading />}> */}
         <SimpleBar>
           <MaxWidthWrapper>{children}</MaxWidthWrapper>
         </SimpleBar>
-        {/* </Suspense> */}
       </main>
     </>
   )

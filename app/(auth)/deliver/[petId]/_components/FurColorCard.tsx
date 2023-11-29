@@ -1,7 +1,7 @@
 'use client'
 
 import CustomButton from '@/components/buttons/CustomButton'
-import { Card } from '@/components/ui/card'
+import { Card, cardClassName } from '@/components/ui/card'
 import { catFurColorOptions, dogFurColorOptions } from '@/config/options'
 import { Pet } from '@prisma/client'
 import React from 'react'
@@ -19,7 +19,7 @@ export default function FurColorCard({
 
   if (!category) return null
   return (
-    <Card className=" h-[206px] w-[381px]  rounded-[20px] p-[18px]">
+    <Card className={cardClassName}>
       <div className="space-y-1.5">
         <div>
           毛色<span className="text-info">(*必選)</span>

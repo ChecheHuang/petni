@@ -42,7 +42,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onChange}>
-      <DialogContent className=" flex h-[156px] w-[472px] flex-col items-center  ">
+      <DialogContent className=" flex h-[156px] w-[90vw] flex-col items-center md:w-[472px]  ">
         {/* {isLoading && <Loading className="absolute w-full" />} */}
         <DialogDescription className="mt-[39px]">
           {description}

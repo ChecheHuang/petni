@@ -1,7 +1,7 @@
 'use client'
 
 import { FormDataType } from './SettingForm'
-import { Card } from '@/components/ui/card'
+import { Card, cardClassName } from '@/components/ui/card'
 import { FormControl, FormField } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import React from 'react'
@@ -13,7 +13,7 @@ type DescriptionCardProps = {
 
 export default function DescriptionCard({ control }: DescriptionCardProps) {
   return (
-    <Card className=" h-[184px] w-[381px] rounded-[20px] p-[18px]">
+    <Card className={cardClassName}>
       <div className="space-y-1.5">
         <div>狀況</div>
         <FormField

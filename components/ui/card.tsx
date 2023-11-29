@@ -74,5 +74,13 @@ const CardFooter = React.forwardRef<
   />
 ))
 CardFooter.displayName = 'CardFooter'
-
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+const cardClassName = 'mx-auto w-[95vw] max-w-[381px] rounded-[20px] p-[18px]'
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  cardClassName,
+}
