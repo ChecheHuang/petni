@@ -1,10 +1,13 @@
 import { getPet } from '../../../../actions/pet'
+import MobliePrevButton from './_components/MobliePrevButton'
 import { FillImage } from '@/components/fill-image'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import React from 'react'
+import { FaAngleLeft } from 'react-icons/fa6'
 
 export default async function DetailsPage({
   params: { petId },
@@ -34,14 +37,15 @@ export default async function DetailsPage({
   }
 
   return (
-    <div className="mt-[35px] flex justify-center gap-[26px] ">
-      <div className=" flex h-[579px] w-[428px] items-center justify-center rounded-[32px] bg-white p-[18px]">
+    <div className="flex flex-col justify-center gap-[26px] md:mt-[35px] md:flex-row ">
+      <div className=" relative flex h-[274px] w-full flex-col items-center justify-center rounded-[32px] bg-white md:h-[579px] md:w-[428px] md:flex-row md:p-[18px]">
+        <MobliePrevButton />
         <FillImage className="rounded-[32px]" src={imageUrl} />
       </div>
-      <div className="flex h-[579px] w-[425px] flex-col justify-between">
-        <div className="flex w-full items-center justify-between">
+      <div className=" z-10 mt-[-90px] flex w-full flex-col gap-[13px] px-[13px] md:mt-0 md:h-[579px] md:w-[425px] md:justify-between md:gap-0 md:px-0">
+        <div className="flex w-full items-center justify-between  text-white  md:text-black">
           <div>
-            <div className="text-lg">{name}</div>
+            <div className="text-lg ">{name}</div>
             <div className="text-sm">
               {city}
               {area}
@@ -102,7 +106,7 @@ export default async function DetailsPage({
             </div>
           </div>
         </Card>
-        <Card className=" h-[202px] space-y-2.5 rounded-[20px] p-6">
+        <Card className=" space-y-2.5 rounded-[20px] p-6 md:h-[202px]">
           <div>{phone}</div>
           <div>
             {city}

@@ -28,7 +28,7 @@ export default function FurColorCard({
           {options.map((option) => (
             <CustomButton
               key={option}
-              className="h-[40px] w-[110px] "
+              className="h-[40px] w-[90px] md:w-[110px] "
               value={option}
               activeValue={furColor}
               onClick={setFurColor}

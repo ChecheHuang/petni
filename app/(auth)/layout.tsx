@@ -19,7 +19,7 @@ async function AuthLayout({ children }: { children: React.ReactNode }) {
     <>
       <DeleteModal />
       <NavigateModal />
-      <div className="min-h-screen ">
+      <div className="min-h-screen pb-[80px]  ">
         <Navbar>
           <LogoutButton
             image={session?.user?.image as string}

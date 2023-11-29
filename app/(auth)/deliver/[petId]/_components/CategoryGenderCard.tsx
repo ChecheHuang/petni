@@ -62,7 +62,7 @@ export default function CategoryGenderCard({
           />
           <CustomButton
             className={cn(
-              'h-[53px] w-[53px] md:h-[60px] md:w-[60px]',
+              'h-[53px] w-[53px] whitespace-nowrap md:h-[60px] md:w-[60px] ',
               gender !== '不明' && 'text-[#878787]',
             )}
             value={'不明'}
