@@ -42,8 +42,9 @@ input:disabled + label {
   opacity: 50%;
 }
 
+
 .bg-linear {
-  background: linear-gradient(white, black);
+  background: linear-gradient(45deg, rgb(59, 58, 58), hsl(12.4 87.1% 75.1%));
 }
 /* For Webkit-based browsers (Chrome, Safari and Opera) */
 .scrollbar-hide::-webkit-scrollbar {

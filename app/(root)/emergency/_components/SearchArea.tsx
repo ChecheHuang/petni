@@ -17,14 +17,14 @@ const SearchArea = () => {
   }
 
   return (
-    <div className="flex justify-center py-[16px]">
+    <div className="flex justify-center px-2 py-[16px] md:px-0">
       <div className="space-y-[9px]">
-        <div className="space-x-3 ">
+        <div className="flex w-full justify-between gap-3 ">
           {options.map((option) => {
             const isSelected = searchParams.area === option
             return (
               <Button
-                className="h-[38px] w-[95px]"
+                className="h-[38px] md:w-[95px]"
                 variant={isSelected ? 'info' : 'outline'}
                 onClick={() => onClick(option)}
                 key={option}

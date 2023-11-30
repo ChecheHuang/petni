@@ -38,7 +38,7 @@ export default async function DetailsPage({
 
   return (
     <div className="flex flex-col justify-center gap-[26px] md:mt-[35px] md:flex-row ">
-      <div className=" relative flex h-[274px] w-full flex-col items-center justify-center rounded-[32px] bg-white md:h-[579px] md:w-[428px] md:flex-row md:p-[18px]">
+      <div className="bg-linear relative flex h-[274px] w-full flex-col items-center justify-center bg-white md:h-[579px] md:w-[428px] md:flex-row md:rounded-[32px] md:p-[18px]">
         <MobliePrevButton />
         <FillImage className="rounded-[32px]" src={imageUrl} />
       </div>
