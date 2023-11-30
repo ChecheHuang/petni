@@ -56,7 +56,7 @@ const AnimalHospitalList = ({
     <>
       <div
         ref={scrollRef}
-        className=" scrollbar-hide  h-[calc(100vh-77.53px-180px)] overflow-auto px-[88px]"
+        className=" scrollbar-hide overflow-auto px-4   md:h-[calc(100vh-77.53px-180px)] md:px-[88px]"
       >
         {list.map((cityGroup, index) => (
           <div className="space-y-2" key={index}>
@@ -66,7 +66,7 @@ const AnimalHospitalList = ({
               </div>
               <div className="text-xl font-bold">{cityGroup?.city}</div>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
               {cityGroup?.animalHospitals?.map((animalHospital) => {
                 return (
                   <AnimalHospitalItem
@@ -84,7 +84,7 @@ const AnimalHospitalList = ({
           scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
         }}
         variant="info"
-        className="fixed bottom-[5%] right-[10%] h-16 w-16 rounded-full "
+        className="fixed bottom-[5%] right-[10%] hidden h-16 w-16 rounded-full md:flex "
       >
         Top
       </Button>

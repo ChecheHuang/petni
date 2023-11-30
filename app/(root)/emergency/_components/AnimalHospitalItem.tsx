@@ -14,7 +14,10 @@ const AnimalHospitalItem = ({
   isEmergency,
 }: AnimalHospital) => {
   return (
-    <Card key={id} className=" flex  h-[104px] w-[363px] justify-between p-4">
+    <Card
+      key={id}
+      className=" flex  h-full justify-between p-4 md:h-[104px] md:w-[363px]"
+    >
       <div className="flex flex-col justify-between">
         <div>{name}</div>
         <div className="text-sm">{phone}</div>

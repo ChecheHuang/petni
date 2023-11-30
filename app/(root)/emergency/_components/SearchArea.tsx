@@ -17,7 +17,7 @@ const SearchArea = () => {
   }
 
   return (
-    <div className="flex justify-center px-2 py-[16px] md:px-0">
+    <div className="sticky top-0 flex justify-center bg-[#f8f8f8] px-2 py-[16px] md:px-0">
       <div className="space-y-[9px]">
         <div className="flex w-full justify-between gap-3 ">
           {options.map((option) => {

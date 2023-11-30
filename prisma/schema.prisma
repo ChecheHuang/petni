@@ -66,6 +66,14 @@ model Pet {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model Theme {
+  id          String @id @default(cuid())
+  category    String
+  furColor    String
+  imgUrl      String
+  description String
+}
+
 model AnimalHospital {
   id          String  @id @default(cuid())
   name        String
