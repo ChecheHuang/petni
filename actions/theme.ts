@@ -1,17 +1,22 @@
 import prismadb from '@/lib/prismadb'
+import { Theme } from '@prisma/client'
 
 export const getThemes = async () => {
   const theme = await prismadb.theme.findMany()
 
-  const map = {} as any
-  const result = theme.reduce((acc, pet) => {
-    if (!map[pet.category]) {
-    }
-    return acc
-  }, {} as any)
+  const result = theme.reduce(
+    (acc, pet) => {
+      if (!acc[pet.category]) {
+        acc[pet.category] = [pet]
+      } else {
+        acc[pet.category].push(pet)
+      }
+      return acc
+    },
+    {} as Record<string, Theme[]>,
+  )
 
-  console.log(result)
-  return theme
+  return result
 }
 
 export type GetThemesReturnType = GetAsyncFnReturnType<typeof getThemes>

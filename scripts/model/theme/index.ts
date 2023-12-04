@@ -27,7 +27,7 @@ export const seedTheme = async () => {
         description: '貓界的哈士奇、個性好動，容易跟其他貓打成一片。',
       },
       {
-        furColor: '虎斑 ',
+        furColor: '虎斑',
         description:
           '野性美、狩獵高手、傲嬌脾氣、警戒心強，一旦被牠認定，就會很依賴主子。',
       },
@@ -39,11 +39,11 @@ export const seedTheme = async () => {
     ],
     犬: [
       {
-        furColor: '三色 ',
+        furColor: '三色',
         description: '個性老實、喜歡社交，溫順黏人的小跟屁蟲。',
       },
       {
-        furColor: '紅棕 ',
+        furColor: '紅棕',
         description: '個性獨立、外向、喜歡與人互動。',
       },
       {
@@ -59,11 +59,11 @@ export const seedTheme = async () => {
         description: '個性穩重、敏捷聰明、學習力強。 ',
       },
       {
-        furColor: '雙色 ',
+        furColor: '雙色',
         description: '活潑好動、憨厚、愛玩、天生少根筋、無厘頭，親人也親狗。',
       },
       {
-        furColor: '虎斑 ',
+        furColor: '虎斑',
         description: '身上有著老虎斑點，面惡心善、忠心勇敢、聰明機警。',
       },
       {
