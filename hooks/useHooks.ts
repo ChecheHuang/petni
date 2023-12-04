@@ -1,8 +1,17 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import qs from 'query-string';
-import { DependencyList, EffectCallback, useEffect, useState } from 'react';
-import { useRef } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import qs from 'query-string'
+import { DependencyList, EffectCallback, useEffect, useState } from 'react'
+import { useRef } from 'react'
 
+export function usePrev<T>(value: T): T | undefined {
+  const ref = useRef<T>()
+
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+
+  return ref.current
+}
 
 export function useIsFirstRender(): boolean {
   const isFirst = useRef(true)

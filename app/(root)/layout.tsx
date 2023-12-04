@@ -16,7 +16,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </Link>
       </Navbar>
       <MobileBottomNavbar />
-      <main className="h-[calc(100vh-77.53px)]">
+      <main className="h-[calc(100vh-77.53px)]  ">
         <SimpleBar>
           <MaxWidthWrapper>{children}</MaxWidthWrapper>
         </SimpleBar>
