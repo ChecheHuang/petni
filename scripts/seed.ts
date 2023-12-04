@@ -1,4 +1,5 @@
 import { seedAnimalHospital } from './model/animalHospital'
+import { seedTheme } from './model/theme'
 import { seedUser } from './model/user'
 import { PrismaClient } from '@prisma/client'
 
@@ -13,6 +14,7 @@ const reset = async () => {
 const seed = async () => {
   await seedUser()
   await seedAnimalHospital()
+  await seedTheme()
 }
 
 async function main() {
