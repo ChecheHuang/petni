@@ -53,8 +53,14 @@ function Card() {
       }}
       style={{ x: x, y: y, rotate, opacity }}
       onDrag={(event, info) => {
-        console.log('拖曳位置x:', info.point.x)
-        console.log('拖曳位置y:', info.point.y)
+        const { x, y } = info.point
+        
+        console.log('拖曳位置x:', x);
+        console.log('拖曳位置y:', y);
+
+        if (x > 200 && y > 200) {
+          console.log('like')
+        }
       }}
     >
       <FillImage

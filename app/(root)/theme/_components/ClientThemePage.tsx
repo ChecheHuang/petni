@@ -51,35 +51,38 @@ const ClientThemePage = (themes: GetThemesReturnType) => {
     })
   }
   return (
-    <div className=" max-w-screen relative  flex h-[calc(100vh-77.53px)] justify-center overflow-hidden  ">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[309.44px] w-[304.11px] -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-info/25 p-4 ">
+    <div className=" max-w-screen relative  flex min-h-[calc(100vh-77.53px)]  justify-center  overflow-hidden    ">
+      <div className="pointer-events-none absolute left-1/2  top-1/2 -z-10 hidden h-[309.44px] w-[304.11px] -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-info/25 p-4 md:flex ">
         <FillImage
           src={`/images/theme/text-${
             currentCategory === '貓' ? 'cat' : 'dog'
           }.png`}
         />
       </div>
-      <div className="absolute right-[130px] top-[40px]  z-50 h-[30px] w-[132px] rounded-[10px] bg-white shadow-[0px_2px_7px_0px_#0A0A0A12] ">
-        <button
-          className={cn(
-            'h-full w-1/2 rounded-[10px] text-sm',
-            currentCategory === '貓' && ' bg-black text-sm text-white ',
-          )}
-          onClick={toggleCategory}
-        >
-          喵星人
-        </button>
-        <button
-          className={cn(
-            'h-full w-1/2 rounded-[10px] text-sm',
-            currentCategory === '犬' && ' bg-black text-sm text-white ',
-          )}
-          onClick={toggleCategory}
-        >
-          汪星人
-        </button>
+      <div className="absolute top-0 flex h-[62px] w-screen items-center justify-center bg-white md:right-[130px] md:top-[40px] md:h-auto md:w-auto">
+        <div className=" z-50 h-[30px]  w-[132px] rounded-[10px] bg-white shadow-[0px_2px_7px_0px_#0A0A0A12]  ">
+          <button
+            className={cn(
+              'h-full w-1/2 rounded-[10px] text-sm',
+              currentCategory === '貓' && ' bg-black text-sm text-white ',
+            )}
+            onClick={toggleCategory}
+          >
+            喵星人
+          </button>
+          <button
+            className={cn(
+              'h-full w-1/2 rounded-[10px] text-sm',
+              currentCategory === '犬' && ' bg-black text-sm text-white ',
+            )}
+            onClick={toggleCategory}
+          >
+            汪星人
+          </button>
+        </div>
       </div>
-      <div className="absolute bottom-[40px] right-[130px]  z-50 flex h-[42px] w-[108px] justify-between   ">
+
+      <div className="absolute bottom-1/2 z-50 flex h-[42px]  w-full justify-between px-4  md:bottom-[40px] md:right-[130px] md:w-[108px] md:px-0   ">
         <button className="flex h-[42px] w-[42px] items-center justify-center rounded-[14px] bg-white shadow-[0px_2px_7px_0px_#0A0A0A12]">
           <ChevronLeft onClick={onPrev} className="text-bold h-6 w-6" />
         </button>
@@ -87,20 +90,23 @@ const ClientThemePage = (themes: GetThemesReturnType) => {
           <ChevronRight onClick={onNext} className="text-bold h-6 w-6" />
         </button>
       </div>
-      {/* <AnimatePresence> */}
       {isShow && (
-        <div className="flex h-full w-screen justify-center gap-[300px] ">
+        <div className="mt-[62px] flex h-[calc(100vh-140px)]  w-screen flex-col-reverse  justify-center md:mt-0 md:h-full md:flex-row md:gap-[300px] ">
           <motion.div
             initial={{ opacity: 0, x }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex w-[350px] flex-col justify-center  gap-[37px] pl-[60px] "
+            className="flex w-screen flex-col justify-center pl-4  md:w-[350px]  md:pl-[60px] "
           >
-            <h1 className="text-[72px] font-bold">{furColor + category}</h1>
-            <div className="text-lg text-[#878787]">{description}</div>
+            <h1 className="text-[20px] font-bold md:text-[72px]">
+              {furColor + category}
+            </h1>
+            <div className=" h-[67px] text-base text-[#878787] md:h-[54px] md:text-lg">
+              {description}
+            </div>
             <Button
               variant="ghost"
-              className="group flex h-[46px] w-[196px] justify-between rounded-[16px] bg-white pl-[28px] pr-[10px] shadow-[0px_2px_7px_0px_#0A0A0A12]  "
+              className="group mx-auto flex h-[46px] w-[196px] justify-between rounded-[16px] bg-white pl-[28px] pr-[10px] shadow-[0px_2px_7px_0px_#0A0A0A12] md:mx-0 md:mt-[37px]  "
             >
               搜尋{furColor + category}
               <div className="flex h-[37px] w-[37px] items-center justify-center rounded-[16px] bg-black text-white transition-all group-hover:bg-white group-hover:text-info ">
@@ -113,14 +119,13 @@ const ClientThemePage = (themes: GetThemesReturnType) => {
               initial={{ opacity: 0, x: x * 3 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
-              className="h-[642px] w-[457px]  "
+              className="h-[352px] w-[250px] md:h-[642px] md:w-[457px]  "
             >
               <FillImage src={imgUrl} />
             </motion.div>
           </div>
         </div>
       )}
-      {/* </AnimatePresence> */}
     </div>
   )
 }

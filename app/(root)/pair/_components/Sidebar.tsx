@@ -198,7 +198,7 @@ function Sidebar({ className }: { className?: string }) {
             </div>
             <Button
               type="submit"
-              className={cn('sticky bottom-0   ', ' md:mt-2')}
+              className={cn('sticky bottom-0 ', 'md:bottom-auto md:mt-2')}
             >
               套用
             </Button>
