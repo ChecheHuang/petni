@@ -1,12 +1,14 @@
 import Card from './Card'
 import CardContainer from './CardContainer'
+import { PairPetsType } from '@/types/pairPets'
 import React from 'react'
 
-function DropCardArea() {
+function DropCardArea({ pairPets }: { pairPets: PairPetsType }) {
   return (
     <CardContainer>
-      <Card />
-      <Card />
+      {pairPets.map((pet, index) => (
+        <Card key={pet.id} index={index} {...pet} />
+      ))}
     </CardContainer>
   )
 }
