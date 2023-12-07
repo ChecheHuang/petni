@@ -8,6 +8,7 @@ import {
   useTransform,
   useAnimation,
 } from 'framer-motion'
+import { debounce } from 'lodash'
 import { X } from 'lucide-react'
 import React from 'react'
 
@@ -57,6 +58,9 @@ function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
       drag
       // dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
       onDragEnd={(event, info) => {
+        const { x, y } = info.point
+        if (x > 520) return handleLike()
+        if (x < 190) return handleDisLike()
         control.start({
           x: 0,
           y: 0,
@@ -66,13 +70,6 @@ function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
       style={{ x: x, y: y, rotate, opacity }}
       onDrag={(event, info) => {
         const { x, y } = info.point
-        
-        console.log('拖曳位置x:', x);
-        console.log('拖曳位置y:', y);
-
-        if (x > 200 && y > 200) {
-          console.log('like')
-        }
       }}
     >
       <FillImage className=" pointer-events-none" src={imageUrl} alt="" />

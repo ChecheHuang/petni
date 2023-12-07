@@ -11,8 +11,11 @@ import React from 'react'
 
 function Main() {
   const { data } = useFilterPet()
-  const { data: pairPets = [], isLoading } =
-    trpcClient.pet.getPairPets.useQuery()
+  const { data: result, isLoading } = trpcClient.pet.getPairPets.useQuery({
+    limit: 4,
+    cursor: '',
+  })
+  const pairPets = result?.data || []
   if (isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">

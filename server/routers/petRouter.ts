@@ -61,20 +61,27 @@ export const petRouter = router({
       })
     } catch (err) {}
   }),
-  getPairPets: publicProcedure.query(async () => {
-    const totalPets = await prismadb.pet.findMany({
-      select: {
-        id: true,
-        imageUrl: true,
-        gender: true,
-        name: true,
-        city: true,
-        area: true,
-      },
-      where: {
-        isPublish: true,
-      },
-    })
-    return totalPets
-  }),
+  getPairPets: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100).nullish(),
+        cursor: z.string().nullish(),
+      }),
+    )
+    .query(async () => {
+      const pairPets = await prismadb.pet.findMany({
+        select: {
+          id: true,
+          imageUrl: true,
+          gender: true,
+          name: true,
+          city: true,
+          area: true,
+        },
+        where: {
+          isPublish: true,
+        },
+      })
+      return { data: pairPets }
+    }),
 })
