@@ -57,10 +57,12 @@ function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
       animate={control}
       drag
       // dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      onDragEnd={(event, info) => {
-        const { x, y } = info.point
-        if (x > 520) return handleLike()
-        if (x < 190) return handleDisLike()
+      onDragEnd={(event, { point: { x } }) => {
+        const windowWidth = window.innerWidth
+        const likeThreshold = windowWidth * 0.65
+        const dislikeThreshold = windowWidth * 0.5
+        if (x > likeThreshold) return handleLike()
+        if (x < dislikeThreshold) return handleDisLike()
         control.start({
           x: 0,
           y: 0,

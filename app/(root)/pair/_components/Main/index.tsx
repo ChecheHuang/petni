@@ -6,16 +6,23 @@ import BottomArea from './BottomArea'
 import DropCardArea from './DropCardArea'
 import SimpleBar from '@/components/SimpleBar'
 import Loading from '@/components/loading'
+import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
 import trpcClient from '@/lib/trpc/trpcClient'
 import React from 'react'
 
 function Main() {
-  const { data } = useFilterPet()
-  const { data: result, isLoading } = trpcClient.pet.getPairPets.useQuery({
-    limit: 4,
-    cursor: '',
-  })
-  const pairPets = result?.data || []
+  const { settingData } = useFilterPet()
+  const { data, isLoading,fetchNextPage } = trpcClient.pet.getPairPets.useInfiniteQuery(
+    {
+      limit: INFINITE_QUERY_LIMIT,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage?.nextCursor,
+      keepPreviousData: true,
+    },
+  )
+  console.log(data)
+  const pairPets = data?.pages.flatMap((page) => page.pairPets) || []
   if (isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">

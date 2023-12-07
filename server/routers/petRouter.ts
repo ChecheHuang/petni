@@ -1,4 +1,5 @@
 import { router, publicProcedure, privateProcedure } from '../trpc'
+import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
 import prismadb from '@/lib/prismadb'
 import { petFormSchema } from '@/lib/validations/petValidation'
 import { Prisma } from '@prisma/client'
@@ -68,8 +69,13 @@ export const petRouter = router({
         cursor: z.string().nullish(),
       }),
     )
-    .query(async () => {
+    .query(async ({ input }) => {
+      const { cursor } = input
+      const limit = input.limit ?? INFINITE_QUERY_LIMIT
+
       const pairPets = await prismadb.pet.findMany({
+        take: limit + 1,
+        cursor: cursor ? { id: cursor } : undefined,
         select: {
           id: true,
           imageUrl: true,
@@ -82,6 +88,11 @@ export const petRouter = router({
           isPublish: true,
         },
       })
-      return { data: pairPets }
+      let nextCursor: typeof cursor | undefined = undefined
+      if (pairPets.length > limit) {
+        const nextItem = pairPets.pop()
+        nextCursor = nextItem?.id
+      }
+      return { pairPets, nextCursor }
     }),
 })

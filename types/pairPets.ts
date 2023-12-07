@@ -3,4 +3,4 @@ import { inferRouterOutputs } from '@trpc/server'
 
 type RouterOutput = inferRouterOutputs<AppRouter>
 
-export type PairPetsType = RouterOutput['pet']['getPairPets']['data']
+export type PairPetsType = RouterOutput['pet']['getPairPets']['pairPets']

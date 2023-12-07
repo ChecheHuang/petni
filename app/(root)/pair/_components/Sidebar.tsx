@@ -15,13 +15,13 @@ import { toast } from 'sonner'
 import { create } from 'zustand'
 
 interface useFilterPetStore {
-  data: Partial<SettingFormType>
-  setData: (data: Partial<SettingFormType>) => void
+  settingData: Partial<SettingFormType>
+  setSettingData: (settingData: Partial<SettingFormType>) => void
 }
 
 export const useFilterPet = create<useFilterPetStore>((set) => ({
-  data: {},
-  setData: (data: Partial<SettingFormType>) => set({ data }),
+  settingData: {},
+  setSettingData: (settingData: Partial<SettingFormType>) => set({ settingData }),
 }))
 type SettingFormType = {
   category: string
@@ -33,7 +33,7 @@ type SettingFormType = {
 }
 
 function Sidebar({ className }: { className?: string }) {
-  const { data: initData, setData } = useFilterPet()
+  const { settingData: initData, setSettingData: setData } = useFilterPet()
   const { setIsOpen } = useSheet()
   const form = useForm<SettingFormType>({
     defaultValues: initData,
