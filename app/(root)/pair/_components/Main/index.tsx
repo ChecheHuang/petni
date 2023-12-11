@@ -12,17 +12,18 @@ import React from 'react'
 
 function Main() {
   const { settingData } = useFilterPet()
-  const { data, isLoading,fetchNextPage } = trpcClient.pet.getPairPets.useInfiniteQuery(
-    {
-      limit: INFINITE_QUERY_LIMIT,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage?.nextCursor,
-      keepPreviousData: true,
-    },
-  )
-  console.log(data)
-  const pairPets = data?.pages.flatMap((page) => page.pairPets) || []
+  const { data, isLoading, fetchNextPage } =
+    trpcClient.pet.getPairPets.useInfiniteQuery(
+      {
+        limit: INFINITE_QUERY_LIMIT,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage?.nextCursor,
+        keepPreviousData: true,
+      },
+    )
+  const pairPets =
+    data?.pages.flatMap((page) => page.pairPets).toReversed() || []
   if (isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">
@@ -35,7 +36,7 @@ function Main() {
         <MobileSidebar />
       </div>
       <SimpleBar>
-        <DropCardArea pairPets={pairPets} />
+        <DropCardArea pairPets={pairPets} fetchNextPage={fetchNextPage} />
         <BottomArea />
       </SimpleBar>
     </div>

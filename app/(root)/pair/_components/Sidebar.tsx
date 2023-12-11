@@ -21,7 +21,8 @@ interface useFilterPetStore {
 
 export const useFilterPet = create<useFilterPetStore>((set) => ({
   settingData: {},
-  setSettingData: (settingData: Partial<SettingFormType>) => set({ settingData }),
+  setSettingData: (settingData: Partial<SettingFormType>) =>
+    set({ settingData }),
 }))
 type SettingFormType = {
   category: string

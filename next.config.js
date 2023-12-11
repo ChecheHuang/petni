@@ -18,6 +18,11 @@ const nextConfig = {
         hostname: 'images.dog.ceo',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: '24.media.tumblr.com',
+        pathname: '**',
+      },
     ],
   },
 }

@@ -32,7 +32,7 @@ model Account {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String?   @default("")
   email         String?   @unique
   emailVerified DateTime?
   username      String?   @unique
@@ -48,15 +48,15 @@ model User {
 model Pet {
   id          String  @id @default(cuid())
   imageUrl    String
-  category    String?
-  furColor    String?
-  gender      String?
-  age         String?
-  name        String?
-  phone       String?
-  city        String?
-  area        String?
-  description String?
+  category    String  @default("")
+  furColor    String  @default("")
+  gender      String  @default("")
+  age         String  @default("")
+  name        String  @default("")
+  phone       String  @default("")
+  city        String  @default("")
+  area        String  @default("")
+  description String  @default("")
   isPublish   Boolean @default(false)
 
   createdAt DateTime @default(now())
