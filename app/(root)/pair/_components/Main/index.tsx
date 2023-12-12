@@ -8,7 +8,7 @@ import SimpleBar from '@/components/SimpleBar'
 import Loading from '@/components/loading'
 import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
 import trpcClient from '@/lib/trpc/trpcClient'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Main() {
   const { settingData } = useFilterPet()
@@ -24,6 +24,14 @@ function Main() {
     )
   const pairPets =
     data?.pages.flatMap((page) => page.pairPets).toReversed() || []
+
+  console.log(pairPets)
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     fetchNextPage()
+  //     console.log(pairPets)
+  //   }, 1000)
+  // }, [])
   if (isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">
@@ -32,11 +40,19 @@ function Main() {
     )
   return (
     <div className=" item-center flex h-[calc(100vh-77.53px)] w-screen flex-col  justify-center   md:w-[867px] ">
+      <button
+        onClick={() => {
+          fetchNextPage()
+          console.log(pairPets)
+        }}
+      >
+        test
+      </button>
       <div className="md:hidden">
         <MobileSidebar />
       </div>
       <SimpleBar>
-        <DropCardArea pairPets={pairPets} fetchNextPage={fetchNextPage} />
+        <DropCardArea pairPets={pairPets} />
         <BottomArea />
       </SimpleBar>
     </div>
