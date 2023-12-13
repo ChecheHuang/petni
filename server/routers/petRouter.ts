@@ -93,8 +93,6 @@ export const petRouter = router({
         const nextItem = pairPets.pop()
         nextCursor = nextItem?.id
       }
-      console.log(pairPets.length)
-      console.log(nextCursor)
       return { pairPets, nextCursor }
     }),
 })

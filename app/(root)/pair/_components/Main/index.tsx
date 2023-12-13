@@ -8,10 +8,11 @@ import SimpleBar from '@/components/SimpleBar'
 import Loading from '@/components/loading'
 import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
 import trpcClient from '@/lib/trpc/trpcClient'
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 
 function Main() {
   const { settingData } = useFilterPet()
+  const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const { data, isLoading, fetchNextPage } =
     trpcClient.pet.getPairPets.useInfiniteQuery(
       {
@@ -23,15 +24,13 @@ function Main() {
       },
     )
   const pairPets =
-    data?.pages.flatMap((page) => page.pairPets).toReversed() || []
+    data?.pages
+      .flatMap((page) => page.pairPets)
+      .toReversed()
+      .filter((_, index) => index >= currentCardIndex) || []
 
   console.log(pairPets)
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     fetchNextPage()
-  //     console.log(pairPets)
-  //   }, 1000)
-  // }, [])
+
   if (isLoading)
     return (
       <div className="flex h-full w-full items-center justify-center">
@@ -40,19 +39,11 @@ function Main() {
     )
   return (
     <div className=" item-center flex h-[calc(100vh-77.53px)] w-screen flex-col  justify-center   md:w-[867px] ">
-      <button
-        onClick={() => {
-          fetchNextPage()
-          console.log(pairPets)
-        }}
-      >
-        test
-      </button>
       <div className="md:hidden">
         <MobileSidebar />
       </div>
       <SimpleBar>
-        <DropCardArea pairPets={pairPets} />
+        <DropCardArea setCurrentCardIndex={setCurrentCardIndex} fetchNextPage={fetchNextPage} pairPets={pairPets} />
         <BottomArea />
       </SimpleBar>
     </div>

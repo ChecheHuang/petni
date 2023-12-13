@@ -20,9 +20,22 @@ type CardProps = {
   area: string | null
   name: string | null
   id: string
+} & {
+  isLastCard?: boolean
+  fetchNextPage?: () => void
+  remove?: () => void
 }
 
-function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
+function Card({
+  imageUrl,
+  gender,
+  city,
+  area,
+  name,
+  index,
+  fetchNextPage,
+  remove,
+}: CardProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const rotate = useTransform(x, [-100, 0, 100], [-15, -3, 15])
@@ -39,6 +52,8 @@ function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
       y: -200,
       transition: { duration: 0.5 },
     })
+    remove && remove()
+    fetchNextPage && fetchNextPage()
   }
   const handleLike = () => {
     control.start({
@@ -46,6 +61,9 @@ function Card({ imageUrl, gender, city, area, name, index }: CardProps) {
       y: 200,
       transition: { duration: 0.5 },
     })
+    console.log(index)
+    remove && remove()
+    fetchNextPage && fetchNextPage()
   }
 
   return (
