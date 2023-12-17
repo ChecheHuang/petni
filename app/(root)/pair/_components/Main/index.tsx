@@ -26,10 +26,9 @@ function Main() {
   const pairPets =
     data?.pages
       .flatMap((page) => page.pairPets)
-      .toReversed()
       .filter((_, index) => index >= currentCardIndex) || []
 
-  console.log(pairPets)
+  // console.log(pairPets)
 
   if (isLoading)
     return (
@@ -43,8 +42,8 @@ function Main() {
         <MobileSidebar />
       </div>
       <SimpleBar>
-        <DropCardArea setCurrentCardIndex={setCurrentCardIndex} fetchNextPage={fetchNextPage} pairPets={pairPets} />
-        <BottomArea />
+        <DropCardArea fetchNextPage={fetchNextPage} pairPets={pairPets} />
+        <BottomArea pairPets={pairPets} />
       </SimpleBar>
     </div>
   )

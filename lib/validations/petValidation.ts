@@ -9,6 +9,6 @@ export const petFormSchema = z.object({
   phone: z.string(),
   city: z.string(),
   area: z.string().min(1),
-  name: z.string().nullable(),
-  description: z.string().nullable(),
+  name: z.string(),
+  description: z.string(),
 })

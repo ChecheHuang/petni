@@ -1,5 +1,6 @@
 'use client'
 
+import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { FillImage } from '@/components/fill-image'
 import { cn } from '@/lib/utils'
 import {
@@ -8,8 +9,8 @@ import {
   useTransform,
   useAnimation,
 } from 'framer-motion'
-import { debounce } from 'lodash'
 import { X } from 'lucide-react'
+import { getSession } from 'next-auth/react'
 import React from 'react'
 
 type CardProps = {
@@ -27,6 +28,7 @@ type CardProps = {
 }
 
 function Card({
+  id,
   imageUrl,
   gender,
   city,
@@ -34,7 +36,6 @@ function Card({
   name,
   index,
   fetchNextPage,
-  remove,
 }: CardProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -46,23 +47,23 @@ function Card({
   })
   const control = useAnimation()
 
-  const handleDisLike = () => {
+  const handleDisLike = async () => {
     control.start({
       x: -1000,
       y: -200,
       transition: { duration: 0.5 },
     })
-    remove && remove()
+    console.log(id)
     fetchNextPage && fetchNextPage()
   }
-  const handleLike = () => {
+  const handleLike = async () => {
     control.start({
       x: 1000,
       y: 200,
       transition: { duration: 0.5 },
     })
-    console.log(index)
-    remove && remove()
+    console.log(id)
+
     fetchNextPage && fetchNextPage()
   }
 
