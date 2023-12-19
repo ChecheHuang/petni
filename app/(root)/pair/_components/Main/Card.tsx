@@ -2,6 +2,8 @@
 
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { FillImage } from '@/components/fill-image'
+import { storage } from '@/lib/storage'
+import trpcClient from '@/lib/trpc/trpcClient'
 import { cn } from '@/lib/utils'
 import {
   motion,
@@ -10,7 +12,7 @@ import {
   useAnimation,
 } from 'framer-motion'
 import { X } from 'lucide-react'
-import { getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 
 type CardProps = {
@@ -37,6 +39,9 @@ function Card({
   index,
   fetchNextPage,
 }: CardProps) {
+  const session = useSession()
+  const isLogin = session.status === 'authenticated'
+
   const x = useMotionValue(0)
   const y = useMotionValue(0)
   const rotate = useTransform(x, [-100, 0, 100], [-15, -3, 15])
@@ -47,24 +52,24 @@ function Card({
   })
   const control = useAnimation()
 
-  const handleDisLike = async () => {
-    control.start({
-      x: -1000,
-      y: -200,
-      transition: { duration: 0.5 },
-    })
-    console.log(id)
-    fetchNextPage && fetchNextPage()
-  }
-  const handleLike = async () => {
-    control.start({
-      x: 1000,
-      y: 200,
-      transition: { duration: 0.5 },
-    })
-    console.log(id)
+  const { mutate } = trpcClient.collection.createCollection.useMutation()
 
+  const handleLike = (isLike: boolean) => async () => {
+    control.start({
+      x: isLike ? 1000 : -1000,
+      y: isLike ? 200 : -200,
+      transition: { duration: 0.5 },
+    })
     fetchNextPage && fetchNextPage()
+    if (!isLogin) {
+      const collections = storage.get('collections') || []
+      storage.set('collections', [...collections, { petId: id, isLike }])
+      return
+    }
+    mutate({
+      petId: id,
+      isLike,
+    })
   }
 
   return (
@@ -80,8 +85,8 @@ function Card({
         const windowWidth = window.innerWidth
         const likeThreshold = windowWidth * 0.65
         const dislikeThreshold = windowWidth * 0.5
-        if (x > likeThreshold) return handleLike()
-        if (x < dislikeThreshold) return handleDisLike()
+        if (x > likeThreshold) return handleLike(true)
+        if (x < dislikeThreshold) return handleLike(false)
         control.start({
           x: 0,
           y: 0,
@@ -96,7 +101,7 @@ function Card({
       <FillImage className=" pointer-events-none" src={imageUrl} alt="" />
       <div className="absolute bottom-12 left-1/2  flex h-[54px] w-[245px]  -translate-x-[115px]  transform items-center justify-between">
         <div
-          onClick={handleDisLike}
+          onClick={handleLike(false)}
           className="flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full bg-white"
         >
           <X />
@@ -117,7 +122,7 @@ function Card({
           <div className="text-sm">{city || '' + area}</div>
         </div>
         <div
-          onClick={handleLike}
+          onClick={handleLike(true)}
           className="flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full bg-white"
         >
           <div className="h-[31px] w-[31px]">

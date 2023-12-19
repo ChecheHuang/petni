@@ -1,12 +1,10 @@
 import Main from './_components/Main'
-import { MobileSidebar } from './_components/MobileSidebar'
 import Sidebar from './_components/Sidebar'
 import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import React from 'react'
 
 async function PairPage() {
   const session = await getUserAuth()
-  console.log(session)
 
   return (
     <>

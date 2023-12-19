@@ -97,9 +97,9 @@ const CredentialForm = () => {
           toast.error('Invalid credentials!')
         }
 
-        if (callback?.ok) {
-          router.push('/deliver')
-        }
+        // if (callback?.ok) {
+        //   router.push('/deliver')
+        // }
       })
       .finally(() => setIsLoading(false))
   }

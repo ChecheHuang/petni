@@ -14,7 +14,6 @@ import {
 import { Progress } from '@/components/ui/progress'
 import trpcClient from '@/lib/trpc/trpcClient'
 import { Cloud, File, Loader2 } from 'lucide-react'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import Dropzone from 'react-dropzone'

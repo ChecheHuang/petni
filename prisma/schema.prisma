@@ -43,6 +43,7 @@ model User {
 
   accounts Account[]
   pets     Pet[]
+  collections Collection[]
 }
 
 model Pet {
@@ -64,7 +65,23 @@ model Pet {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  collections Collection[]
 }
+
+model Collection {
+  id          String  @id @default(cuid())
+  userId      String
+  petId       String
+  isLike      Boolean @default(false)
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Pet  Pet  @relation(fields: [petId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+}
+
 
 model Theme {
   id          String @id @default(cuid())

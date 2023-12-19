@@ -3,9 +3,11 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper'
 import NavItems from '@/components/NavItems'
 import { cn } from '@/lib/utils'
+import { useSession } from 'next-auth/react'
 import React from 'react'
 
 function Navbar({ children }: { children: React.ReactNode }) {
+  const session = useSession()
   return (
     <>
       <header
@@ -17,6 +19,7 @@ function Navbar({ children }: { children: React.ReactNode }) {
         <MaxWidthWrapper className="h-[77.53px]">
           <div className="flex h-full  items-center justify-between px-[87px]">
             {children}
+            {session.status}
             <NavItems />
           </div>
         </MaxWidthWrapper>

@@ -10,7 +10,7 @@ import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
 import trpcClient from '@/lib/trpc/trpcClient'
 import React, { useState } from 'react'
 
-function Main() {
+function Main({ userId }: { userId?: string }) {
   const { settingData } = useFilterPet()
   const [currentCardIndex, setCurrentCardIndex] = useState(0)
   const { data, isLoading, fetchNextPage } =
