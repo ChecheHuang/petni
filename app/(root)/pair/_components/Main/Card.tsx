@@ -5,6 +5,7 @@ import { FillImage } from '@/components/fill-image'
 import { storage } from '@/lib/storage'
 import trpcClient from '@/lib/trpc/trpcClient'
 import { cn } from '@/lib/utils'
+import { TrpcOutputs } from '@/server'
 import {
   motion,
   useMotionValue,
@@ -15,30 +16,17 @@ import { X } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React from 'react'
 
-type CardProps = {
+type DefaultProps = GetArrType<TrpcOutputs['pet']['getPairPets']['pairPets']>
+
+type CardProps = DefaultProps & {
   index: number
-  imageUrl: string
-  gender: string | null
-  city: string | null
-  area: string | null
-  name: string | null
-  id: string
-} & {
-  isLastCard?: boolean
   fetchNextPage?: () => void
-  remove?: () => void
+  setCurrentShowId: React.Dispatch<React.SetStateAction<string>>
 }
 
-function Card({
-  id,
-  imageUrl,
-  gender,
-  city,
-  area,
-  name,
-  index,
-  fetchNextPage,
-}: CardProps) {
+function Card(props: CardProps) {
+  const { id, imageUrl, gender, city, area, name } = props
+  const { index, fetchNextPage, setCurrentShowId } = props
   const session = useSession()
   const isLogin = session.status === 'authenticated'
 
@@ -52,9 +40,11 @@ function Card({
   })
   const control = useAnimation()
 
-  const { mutate } = trpcClient.collection.createCollection.useMutation()
+  const { mutate: createCollection } =
+    trpcClient.collection.createCollection.useMutation()
 
   const handleLike = (isLike: boolean) => async () => {
+    setCurrentShowId(id)
     control.start({
       x: isLike ? 1000 : -1000,
       y: isLike ? 200 : -200,
@@ -66,10 +56,15 @@ function Card({
       storage.set('collections', [...collections, { petId: id, isLike }])
       return
     }
-    mutate({
+    createCollection({
       petId: id,
       isLike,
     })
+  }
+  const genderSrcMap = {
+    男生: '/images/icons/male.png',
+    女生: '/images/icons/female.png',
+    不明: '/images/icons/unknown.png',
   }
 
   return (
@@ -85,8 +80,8 @@ function Card({
         const windowWidth = window.innerWidth
         const likeThreshold = windowWidth * 0.65
         const dislikeThreshold = windowWidth * 0.5
-        if (x > likeThreshold) return handleLike(true)
-        if (x < dislikeThreshold) return handleLike(false)
+        if (x > likeThreshold) return handleLike(true)()
+        if (x < dislikeThreshold) return handleLike(false)()
         control.start({
           x: 0,
           y: 0,
@@ -111,11 +106,7 @@ function Card({
             {name}
             <span className="h-[24px] w-[24px]">
               <FillImage
-                src={
-                  gender !== '男生'
-                    ? '/images/icons/female.png'
-                    : '/images/icons/male.png'
-                }
+                src={genderSrcMap[gender as keyof typeof genderSrcMap]}
               />
             </span>
           </div>

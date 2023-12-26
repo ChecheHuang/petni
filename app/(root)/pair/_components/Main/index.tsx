@@ -12,7 +12,7 @@ import React, { useState } from 'react'
 
 function Main({ userId }: { userId?: string }) {
   const { settingData } = useFilterPet()
-  const [currentCardIndex, setCurrentCardIndex] = useState(0)
+  const [currentShowId, setCurrentShowId] = useState('')
   const { data, isLoading, fetchNextPage } =
     trpcClient.pet.getPairPets.useInfiniteQuery(
       {
@@ -23,12 +23,7 @@ function Main({ userId }: { userId?: string }) {
         keepPreviousData: true,
       },
     )
-  const pairPets =
-    data?.pages
-      .flatMap((page) => page.pairPets)
-      .filter((_, index) => index >= currentCardIndex) || []
-
-  // console.log(pairPets)
+  const pairPets = data?.pages.flatMap((page) => page.pairPets) || []
 
   if (isLoading)
     return (
@@ -42,8 +37,12 @@ function Main({ userId }: { userId?: string }) {
         <MobileSidebar />
       </div>
       <SimpleBar>
-        <DropCardArea fetchNextPage={fetchNextPage} pairPets={pairPets} />
-        <BottomArea pairPets={pairPets} />
+        <DropCardArea
+          setCurrentShowId={setCurrentShowId}
+          fetchNextPage={fetchNextPage}
+          pairPets={pairPets}
+        />
+        <BottomArea pairPets={pairPets} currentShowId={currentShowId} />
       </SimpleBar>
     </div>
   )

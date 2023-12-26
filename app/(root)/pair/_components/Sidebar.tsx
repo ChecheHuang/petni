@@ -14,6 +14,14 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { create } from 'zustand'
 
+type SettingFormType = {
+  category: string
+  gender: string
+  age: string
+  furColor: string
+  isNearBy: boolean
+  isSound: boolean
+}
 interface useFilterPetStore {
   settingData: Partial<SettingFormType>
   setSettingData: (settingData: Partial<SettingFormType>) => void
@@ -24,15 +32,6 @@ export const useFilterPet = create<useFilterPetStore>((set) => ({
   setSettingData: (settingData: Partial<SettingFormType>) =>
     set({ settingData }),
 }))
-type SettingFormType = {
-  category: string
-  gender: string
-  age: string
-  furColor: string
-  isNearBy: boolean
-  isSound: boolean
-}
-
 function Sidebar({ className }: { className?: string }) {
   const { settingData: initData, setSettingData: setData } = useFilterPet()
   const { setIsOpen } = useSheet()

@@ -1,17 +1,28 @@
+import { FillImage } from '@/components/fill-image'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import Image from 'next/image'
+import { TrpcOutputs } from '@/server'
 import React from 'react'
+
+type PairPetsType = TrpcOutputs['pet']['getPairPets']['pairPets']
 
 function BottomArea({
   pairPets,
+  currentShowId,
 }: {
-  pairPets: { id: string; imageUrl: string; name: string; gender: string }[]
+  pairPets: PairPetsType
+  currentShowId: string
 }) {
-  console.log(pairPets)
+  const findIndex = pairPets.findIndex((pet) => pet.id === currentShowId) || 0
+  const index = findIndex === -1 ? 0 : findIndex
+  const showPairPets = pairPets.slice(index, index + 3)
+  const genderSrcMap = {
+    男生: '/images/icons/male.png',
+    女生: '/images/icons/female.png',
+    不明: '/images/icons/unknown.png',
+  }
   return (
     <div className="hidden h-[120px] items-center justify-around md:flex">
-      {pairPets.map(({ id, imageUrl, name, gender }, index) => {
-        if (index > 2) return null
+      {showPairPets.map(({ id, imageUrl, name, gender, city, area }, index) => {
         return (
           <div
             key={id}
@@ -24,19 +35,14 @@ function BottomArea({
             <div>
               <div className="flex h-1/2 items-center gap-1 font-bold ">
                 {name}
-                <Image
-                  src={
-                    gender === '男生'
-                      ? '/images/icons/male.png'
-                      : '/images/icons/female.png'
-                  }
-                  width={24}
-                  height={24}
-                  alt="alt"
-                />
+                <div className="h-[24px] w-[24px]">
+                  <FillImage
+                    src={genderSrcMap[gender as keyof typeof genderSrcMap]}
+                  />
+                </div>
               </div>
               <div className="flex h-1/2 items-center  text-xs text-[#878787]">
-                台南市南區
+                {city} {area}
               </div>
             </div>
           </div>

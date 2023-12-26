@@ -1,12 +1,16 @@
-import Card from './Card'
-import CardContainer from './CardContainer'
-import { PairPetsType } from '@/types/pairPets'
-import React from 'react'
+import Card from './Card';
+import CardContainer from './CardContainer';
+import { TrpcOutputs } from '@/server';
+import React from 'react';
 
+
+type PairPetsType = TrpcOutputs['pet']['getPairPets']['pairPets']
 function DropCardArea({
   pairPets,
   fetchNextPage,
+  setCurrentShowId,
 }: {
+  setCurrentShowId: React.Dispatch<React.SetStateAction<string>>
   pairPets: PairPetsType
   fetchNextPage: () => void
 }) {
@@ -18,6 +22,7 @@ function DropCardArea({
             key={pet.id}
             fetchNextPage={index === 1 ? fetchNextPage : undefined}
             index={index}
+            setCurrentShowId={setCurrentShowId}
             {...pet}
           />
         )
