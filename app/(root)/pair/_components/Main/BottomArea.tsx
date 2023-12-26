@@ -1,6 +1,7 @@
 import { FillImage } from '@/components/fill-image'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { TrpcOutputs } from '@/server'
+import { MotionProps, motion, AnimatePresence } from 'framer-motion'
 import React from 'react'
 
 type PairPetsType = TrpcOutputs['pet']['getPairPets']['pairPets']
@@ -21,7 +22,7 @@ function BottomArea({
     不明: '/images/icons/unknown.png',
   }
   return (
-    <div className="hidden h-[120px] items-center justify-around md:flex">
+    <div className="hidden h-[120px] items-center justify-between  px-4 md:flex">
       {showPairPets.map(({ id, imageUrl, name, gender, city, area }, index) => {
         return (
           <div
@@ -32,7 +33,11 @@ function BottomArea({
               <AvatarImage src={imageUrl} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
               <div className="flex h-1/2 items-center gap-1 font-bold ">
                 {name}
                 <div className="h-[24px] w-[24px]">
@@ -44,7 +49,7 @@ function BottomArea({
               <div className="flex h-1/2 items-center  text-xs text-[#878787]">
                 {city} {area}
               </div>
-            </div>
+            </motion.div>
           </div>
         )
       })}
