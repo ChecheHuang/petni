@@ -3,7 +3,14 @@
     "semi": false,
     "endOfLine": "auto",
     "plugins": [
-        "@trivago/prettier-plugin-sort-imports",
-        "prettier-plugin-tailwindcss"
-    ]
+        "prettier-plugin-tailwindcss",
+        "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+        "^@[a-zA-Z]+/(.*)$",
+        "^@.*",
+        "^[./]",
+        "^\\..*"
+    ],
+    "importOrderSeparation": true
 }

@@ -1,11 +1,5 @@
 'use client'
 
-import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
-import { FillImage } from '@/components/fill-image'
-import { storage } from '@/lib/storage'
-import trpcClient from '@/lib/trpc/trpcClient'
-import { cn } from '@/lib/utils'
-import { TrpcOutputs } from '@/server'
 import {
   motion,
   useMotionValue,
@@ -14,7 +8,14 @@ import {
 } from 'framer-motion'
 import { X } from 'lucide-react'
 import { useSession } from 'next-auth/react'
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
+import { FillImage } from '@/components/fill-image'
+import { storage } from '@/lib/storage'
+import trpcClient from '@/lib/trpc/trpcClient'
+import { cn } from '@/lib/utils'
+import { TrpcOutputs } from '@/server'
 
 type DefaultProps = GetArrType<TrpcOutputs['pet']['getPairPets']['pairPets']>
 
@@ -52,7 +53,14 @@ function Card(props: CardProps) {
     })
     fetchNextPage && fetchNextPage()
     if (!isLogin) {
-      const collections = storage.get('collections') || []
+      const collections: { petId: string; isLike: boolean }[] =
+        storage.get('collections') || []
+      const index = collections.findIndex((item) => item.petId === id)
+      if (index !== -1) {
+        collections[index].isLike = isLike
+        storage.set('collections', collections)
+        return
+      }
       storage.set('collections', [...collections, { petId: id, isLike }])
       return
     }
@@ -66,6 +74,13 @@ function Card(props: CardProps) {
     女生: '/images/icons/female.png',
     不明: '/images/icons/unknown.png',
   }
+
+  useEffect(() => {
+    if (!isLogin) return
+    const collections: { petId: string; isLike: boolean }[] =
+      storage.get('collections') || []
+    //todo 更新置資料庫然後把collections從storage清除掉
+  }, [isLogin])
 
   return (
     <motion.div

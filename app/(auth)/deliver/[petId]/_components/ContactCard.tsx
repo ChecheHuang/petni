@@ -1,6 +1,7 @@
 'use client'
 
-import { FormDataType } from './SettingForm'
+import { Control } from 'react-hook-form'
+
 import { Card, cardClassName } from '@/components/ui/card'
 import { FormControl, FormField } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -14,7 +15,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { cityOptions } from '@/config/options'
-import { Control } from 'react-hook-form'
+
+import { FormDataType } from './SettingForm'
 
 type ContactCardProps = {
   control: Control<FormDataType, any>
@@ -69,7 +71,7 @@ export default function ContactCard({
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>選擇縣市</SelectLabel>
-                        {Object.keys(cityOptions).map((city) => (
+                        {Object.keys(cityOptions)?.map((city) => (
                           <SelectItem key={city} value={city}>
                             {city}
                           </SelectItem>
@@ -98,7 +100,7 @@ export default function ContactCard({
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>選擇區別</SelectLabel>
-                        {city !== null
+                        {city !== ''
                           ? cityOptions[city as keyof typeof cityOptions].map(
                               (city) => (
                                 <SelectItem key={city} value={city}>
