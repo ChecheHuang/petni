@@ -1,6 +1,6 @@
 import { FillImage } from '@/components/fill-image'
+import { TrpcOutputs } from '@/components/providers/trpcProvider'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { TrpcOutputs } from '@/server'
 import { MotionProps, motion, AnimatePresence } from 'framer-motion'
 import React from 'react'
 

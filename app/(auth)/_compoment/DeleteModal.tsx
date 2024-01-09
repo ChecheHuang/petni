@@ -1,19 +1,21 @@
 'use client'
 
-import { useDeleteModal } from '../_hooks/useDeleteModal'
-import Loading from '@/components/loading'
-import { Modal } from '@/components/modals/modal'
-import trpcClient from '@/lib/trpc/trpcClient'
-import { cn } from '@/lib/utils'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+
+import Loading from '@/components/loading'
+import { Modal } from '@/components/modals/modal'
+import { cn } from '@/lib/utils'
+
+import { useDeleteModal } from '../_hooks/useDeleteModal'
+import { trpcQuery } from '@/components/providers/trpcProvider'
 
 export default function DeleteModal() {
   const { isOpen, onClose, petId } = useDeleteModal()
   const router = useRouter()
 
-  const { mutate, isLoading } = trpcClient.pet.deletePet.useMutation({
+  const { mutate, isLoading } = trpcQuery.pet.deletePet.useMutation({
     onSuccess: () => {
       toast.success('刪除成功')
       router.refresh()

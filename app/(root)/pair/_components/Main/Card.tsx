@@ -10,12 +10,10 @@ import { X } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React, { useEffect } from 'react'
 
-import { getUserAuth } from '@/app/api/auth/[...nextauth]/authOptions'
 import { FillImage } from '@/components/fill-image'
+import { TrpcOutputs, trpcQuery } from '@/components/providers/trpcProvider'
 import { storage } from '@/lib/storage'
-import trpcClient from '@/lib/trpc/trpcClient'
 import { cn } from '@/lib/utils'
-import { TrpcOutputs } from '@/server'
 
 type DefaultProps = GetArrType<TrpcOutputs['pet']['getPairPets']['pairPets']>
 
@@ -28,8 +26,7 @@ type CardProps = DefaultProps & {
 function Card(props: CardProps) {
   const { id, imageUrl, gender, city, area, name } = props
   const { index, fetchNextPage, setCurrentShowId } = props
-  const session = useSession()
-  const isLogin = session.status === 'authenticated'
+  const isLogin = useSession().status === 'authenticated'
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -42,7 +39,7 @@ function Card(props: CardProps) {
   const control = useAnimation()
 
   const { mutate: createCollection } =
-    trpcClient.collection.createCollection.useMutation()
+    trpcQuery.collection.createCollection.useMutation()
 
   const handleLike = (isLike: boolean) => async () => {
     setCurrentShowId(id)
@@ -74,13 +71,6 @@ function Card(props: CardProps) {
     女生: '/images/icons/female.png',
     不明: '/images/icons/unknown.png',
   }
-
-  useEffect(() => {
-    if (!isLogin) return
-    const collections: { petId: string; isLike: boolean }[] =
-      storage.get('collections') || []
-    //todo 更新置資料庫然後把collections從storage清除掉
-  }, [isLogin])
 
   return (
     <motion.div

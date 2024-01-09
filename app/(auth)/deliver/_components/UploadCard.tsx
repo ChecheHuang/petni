@@ -1,7 +1,11 @@
 'use client'
 
-import { useUpload } from '../_hooks/useUpload'
-import DeliverCard from './DeliverCard'
+import { Cloud, File, Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import Dropzone from 'react-dropzone'
+import { toast } from 'sonner'
+
 import { FillImage } from '@/components/fill-image'
 import {
   Dialog,
@@ -12,19 +16,17 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Progress } from '@/components/ui/progress'
-import trpcClient from '@/lib/trpc/trpcClient'
-import { Cloud, File, Loader2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import Dropzone from 'react-dropzone'
-import { toast } from 'sonner'
+
+import { useUpload } from '../_hooks/useUpload'
+import DeliverCard from './DeliverCard'
+import { trpcQuery } from '@/components/providers/trpcProvider'
 
 function UploadCard() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter()
   const { onUploading, isUploading, uploadProgress } = useUpload()
 
-  const { mutateAsync: createNewPet } = trpcClient.pet.createPet.useMutation({
+  const { mutateAsync: createNewPet } = trpcQuery.pet.createPet.useMutation({
     onSuccess: (id) => {
       toast.success('上傳成功')
       setIsOpen(false)

@@ -1,20 +1,28 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
+import React, { useEffect, useState } from 'react'
+
+import SimpleBar from '@/components/SimpleBar'
+import Loading from '@/components/loading'
+import { trpcClient, trpcQuery } from '@/components/providers/trpcProvider'
+import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
+import { storage } from '@/lib/storage'
+
 import { MobileSidebar } from '../MobileSidebar'
 import { useFilterPet } from '../Sidebar'
 import BottomArea from './BottomArea'
 import DropCardArea from './DropCardArea'
-import SimpleBar from '@/components/SimpleBar'
-import Loading from '@/components/loading'
-import { INFINITE_QUERY_LIMIT } from '@/config/infinite-query'
-import trpcClient from '@/lib/trpc/trpcClient'
-import React, { useState } from 'react'
 
 function Main({ userId }: { userId?: string }) {
   const { settingData } = useFilterPet()
+  const isLogin = useSession().status === 'authenticated'
+  const [isCreateFromStorageLoading, setIsCreateFromStorageLoading] =
+    useState(false)
+
   const [currentShowId, setCurrentShowId] = useState('')
   const { data, isLoading, fetchNextPage } =
-    trpcClient.pet.getPairPets.useInfiniteQuery(
+    trpcQuery.pet.getPairPets.useInfiniteQuery(
       {
         limit: INFINITE_QUERY_LIMIT,
       },
@@ -24,6 +32,25 @@ function Main({ userId }: { userId?: string }) {
       },
     )
   const pairPets = data?.pages.flatMap((page) => page.pairPets) || []
+
+  useEffect(() => {
+    if (!isLogin) return
+    ;(async () => {
+      if (!storage.get('collections')) return
+
+      setIsCreateFromStorageLoading(true)
+      const collections: { petId: string; isLike: boolean }[] =
+        storage.get('collections') || []
+
+      await Promise.all(
+        collections.map(async (item) => {
+          trpcClient.collection.createCollection.mutate(item)
+        }),
+      )
+      storage.remove('collections')
+      setIsCreateFromStorageLoading(false)
+    })()
+  }, [isLogin])
 
   if (isLoading)
     return (

@@ -1,6 +1,6 @@
+import { TrpcOutputs } from '@/components/providers/trpcProvider';
 import Card from './Card';
 import CardContainer from './CardContainer';
-import { TrpcOutputs } from '@/server';
 import React from 'react';
 
 

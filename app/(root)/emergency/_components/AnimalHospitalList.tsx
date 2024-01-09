@@ -1,10 +1,13 @@
 'use client'
 
-import AnimalHospitalItem from './AnimalHospitalItem'
+import React, { useEffect, useRef, useState } from 'react'
+
+import { AnimalHospital } from '@prisma/client'
+
 import { FillImage } from '@/components/fill-image'
 import { Button } from '@/components/ui/button'
-import { AnimalHospital } from '@prisma/client'
-import React, { useEffect, useRef, useState } from 'react'
+
+import AnimalHospitalItem from './AnimalHospitalItem'
 
 type AnimalHospitalListType = {
   city: string
@@ -45,6 +48,7 @@ const AnimalHospitalList = ({
         scrollRef.current.removeEventListener('scroll', handleScroll)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
     setList([animalHospitalList[0]])

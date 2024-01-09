@@ -1,16 +1,18 @@
 'use client'
 
-import { useUpload } from '../../_hooks/useUpload'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import Dropzone from 'react-dropzone'
+import { toast } from 'sonner'
+
 import { FillImage } from '@/components/fill-image'
 import Loading from '@/components/loading'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import trpcClient from '@/lib/trpc/trpcClient'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import Dropzone from 'react-dropzone'
-import { toast } from 'sonner'
+
+import { useUpload } from '../../_hooks/useUpload'
+import { trpcQuery } from '@/components/providers/trpcProvider'
 
 export default function ImageCard({
   petId,
@@ -38,7 +40,7 @@ export default function ImageCard({
     return
   }
   const { mutateAsync: updatePet, isLoading: isUpdatePet } =
-    trpcClient.pet.updatePetImage.useMutation({
+    trpcQuery.pet.updatePetImage.useMutation({
       onSuccess: () => {
         toast.success('更新成功')
         router.refresh()

@@ -1,5 +1,16 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { z } from 'zod'
+
+import { useNavigateModal } from '@/app/(auth)/_hooks/useNavigateModal'
+import { Button } from '@/components/ui/button'
+import { Form } from '@/components/ui/form'
+import { petFormSchema } from '@/lib/validations/petValidation'
+
 import { GetPetReturnType } from '../../../../../actions/pet'
 import AgeCard from './AgeCard'
 import CategoryGenderCard from './CategoryGenderCard'
@@ -7,16 +18,7 @@ import ContactCard from './ContactCard'
 import DescriptionCard from './DescriptionCard'
 import FurColorCard from './FurColorCard'
 import NameCard from './NameCard'
-import { useNavigateModal } from '@/app/(auth)/_hooks/useNavigateModal'
-import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
-import trpcClient from '@/lib/trpc/trpcClient'
-import { petFormSchema } from '@/lib/validations/petValidation'
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
-import { z } from 'zod'
+import { trpcQuery } from '@/components/providers/trpcProvider'
 
 export type FormDataType = Omit<GetPetReturnType, 'imageUrl'>
 
@@ -36,7 +38,7 @@ export default function SettingForm({ initData, petId }: SettingFormProps) {
   const { onOpen } = useNavigateModal()
 
   const { mutate: update, isLoading: isUpdating } =
-    trpcClient.pet.updatePet.useMutation({
+    trpcQuery.pet.updatePet.useMutation({
       onSuccess: () => {
         toast.success('更新成功')
         router.refresh()
